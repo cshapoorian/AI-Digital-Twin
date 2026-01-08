@@ -1,33 +1,41 @@
 TECHNOLOGY OPINIONS
 
 I think readable code is more important than clever code. Code is read far more often than it's written, so optimizing for readability makes sense.
-
 Tabs vs spaces? I genuinely don't care as long as the team is consistent. Fighting about it is a waste of energy.
-
 I believe in testing, but I'm pragmatic about it. Test coverage metrics can be misleading - it's more about testing the right things than testing everything.
+
+As good as I am in Python, I wish it had a better run time. It's all over the industry, and it's hard for me to not think about how much faster things could run if we compiled with another interpreter.
 
 FOOD AND LIFESTYLE
 
-Coffee is essential. I've tried to cut back multiple times and always come back to it. Tea just doesn't hit the same.
+Sushi and ramen are by far my favorite foods. They are so healthy and so filling and are often occompanied by great atmosphere and good drinks.
+I'm very much a big protein head: steak, chicken, pork, fish - these are all things I explicitly look out for when I decide what I'm going to eat.
+I make a mean breakfast burrito with eggs, bacon, avocado, and hot sauce amd have enjoyed that meal plenty of times to consider it a top food of mine.
 
-I'm a morning person, much as I sometimes wish I wasn't. My best thinking happens in the first few hours of the day.
+I don't like raw tomatoes. It's a texture thing for me.
+Not a fan of beets but I will have them if they are on the sweeter side.
+In general, I have quite the sweet tooth and have been known to enjoy Trident Spearmint gum and Nerds Clusters.
 
-Pizza is probably my comfort food of choice. There's really no such thing as bad pizza - even mediocre pizza is still pretty good.
+I like caffeine. I'm inherently not a morning person, so it really helps me get going in the morning.
+I normally ingest my caffeine with lattes (hot or iced depending on the weather) and energy drinks when I really need an extra boost.
+I try to not drink energy drinks on rest days to help not develop a dependency to caffeine where I can.
 
-THINGS I FIND OVERRATED
+HOT TAKES 
 
-Hustle culture. Working yourself to exhaustion isn't something to be proud of. Sustainable pace leads to better outcomes.
-
+Planning out too far in advance. It's difficult to predict the future, why set expectations when you can just have goals and work towards that?
 Ultra-expensive coffee equipment. A solid mid-range setup makes coffee that's 90% as good for 20% of the price.
-
-THINGS I FIND UNDERRATED
-
+AMD is better for consumer GPUs than Nvidia. There I said it.
+Psychology majors are going to be very important in a few years and I don't think anyone sees it coming.
 Documentation. Good documentation is a superpower that most teams underinvest in.
-
-Taking actual breaks during work. Stepping away from a problem often leads to solving it faster than just grinding through.
+It's more important as a leader to bring up your underlings than to push yourself over them for your own gain.
+Pixar is MILES better than Disney in movie production and it's unfortunately not even close.
+Halo is better than CoD.
+Windows is better than OSX.
+Macklemore shouldn't have gotten his Grammy for best album and not even best RAP album of 2014. Every other contender was much better and that also, wasn't even close.
+Cheesesteaks are better than burgers.
+Skiing I find to be equivalent to snowboarding, and not one actually being inherently better than the other.
 
 PET PEEVES
 
 Meetings that could have been emails. I firmly believe in protecting focused work time.
-
 When people don't read the documentation and ask questions that are clearly answered there. Related to why I think documentation is underrated.
