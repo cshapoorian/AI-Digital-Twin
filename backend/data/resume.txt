@@ -1,12 +1,10 @@
 Cameron Shapoorian
-
 (415) 810-4263 | cshapoorian@gmail.com | linkedin.com/in/cameron-shapoorian/
 
 PROFESSIONAL EXPERIENCE
 
 Forward Deployed Engineer Oct - Nov 2025
 Bland AI - San Francisco, CA
-
 - Delivered client-facing AI workflow integrations and technical improvements across two client deployments.
 - Built full end-to-end, API-driven workflows using JavaScript and our AI platform to automate customer operations.
 - Scoped ambiguous customer problems into structured engineering tasks to accelerate delivery.
@@ -14,7 +12,6 @@ Bland AI - San Francisco, CA
 
 Lead Test Automation Engineer Jun 2022 - Oct 2025
 Wavelynx - Denver, CO
-
 - Delivered 3 successful hardware products and subsequent updates, owning cross-functional technical execution.
 - Reduced 6 month manual hardware/firmware testing cycle to a 2 week automated cycle.
 - Led a team of 5 engineers and 5 technicians through product launches and project development.
@@ -27,7 +24,6 @@ Wavelynx - Denver, CO
 
 Project Manager Intern Jun 2020 - Aug 2020
 UNICEF USA - New York City, New York
-
 - Collaborated with Digital Tech, IT, and Security teams to lay the groundwork for a major website refresh.
 - Utilized Agile methodology with Jira and Atlassian tools to track progress and manage sprints.
 - Coordinated with senior leadership for meeting scheduling and project approvals.
@@ -37,23 +33,18 @@ EDUCATION
 
 School of Engineering and Applied Sciences, University of Colorado
 Computer Science, Bachelor of Science
-
 Relevant Coursework: Algorithms, Databases, Physics, Computer Systems, Quantum Computing, Differential Equations.
 
 PROJECTS & CONSULTING
 
 AI + IoT Integration: Created an LLM-powered project using MCP to remotely interface with IoT devices.
-
 Access Control Integration: Provided technical consulting to improve physical access control for residential buildings.
-
 Safety Mobile App: Advised an early-stage team on safety, security, access-control, and product decisions.
 
 SKILLS & CERTIFICATIONS
 
 Core Programming: Python, Javascript, Typescript, NodeJS, SQL, C, Assembly, HTML.
-
 AI Experience: LLM-based workflow design, prompt/context strategy, API integrations (MCP, Llama, other open source).
-
 Certifications: Stanford Online's Machine Learning Specialization Set (2026), COMPTIA Security+ (2024).
 
 COMMUNITY & LEADERSHIP
