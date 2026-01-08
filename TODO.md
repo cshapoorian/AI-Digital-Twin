@@ -135,5 +135,5 @@ Check these files for technical details:
 - `CLAUDE.md` - Project requirements and context
 
 
-INCLUDE SPORTS
-CURRENTLY LIVE IN EAST BAY
+https://cameron-doppelganger.netlify.app/
+
