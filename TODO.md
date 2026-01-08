@@ -133,3 +133,7 @@ Check these files for technical details:
 - `ARCHITECTURE.md` - System design and data flow
 - `README.md` - Quick start guide
 - `CLAUDE.md` - Project requirements and context
+
+
+INCLUDE SPORTS
+CURRENTLY LIVE IN EAST BAY
