@@ -24,8 +24,7 @@ function Header({ onNewChat, hasMessages }) {
     >
       <div className="header-content">
         <div className="header-text">
-          <h1>AI Doppelganger</h1>
-          <p>Chat with my AI representation to learn more about me</p>
+          <h1>Cameron's Digital Twin</h1>
         </div>
         {hasMessages && (
           <motion.button

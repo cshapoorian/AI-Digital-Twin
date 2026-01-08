@@ -96,11 +96,6 @@ body {
   flex-direction: column;
 }
 
-@media (max-width: 768px) {
-  .app-container {
-    padding: var(--spacing-md);
-  }
-}
 
 /* Header styles */
 .header {
@@ -393,34 +388,123 @@ body {
   text-align: center;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for tablets */
+@media (max-width: 768px) {
+  .chat-container {
+    border-radius: var(--radius-lg);
+  }
+
+  .chat-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .chat-submit {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Responsive adjustments for mobile */
 @media (max-width: 640px) {
+  .app-container {
+    padding: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+  }
+
+  .header {
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-sm);
+  }
+
   .header-text h1 {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
   }
 
   .header-content {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .new-chat-btn {
-    align-self: flex-end;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.8rem;
   }
 
   .message {
-    max-width: 90%;
+    max-width: 92%;
+  }
+
+  .message-bubble {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
   }
 
   .chat-messages {
     padding: var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   .chat-input-container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+
+  .chat-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .chat-submit {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .chat-container {
+    border-radius: var(--radius-md);
   }
 
   .welcome-message {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
+  }
+
+  .welcome-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .welcome-message h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .welcome-message p {
+    font-size: var(--font-size-sm);
+  }
+
+  .typing-indicator {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 380px) {
+  .header-text h1 {
+    font-size: var(--font-size-base);
+  }
+
+  .new-chat-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+  }
+
+  .chat-submit {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
   }
 }
