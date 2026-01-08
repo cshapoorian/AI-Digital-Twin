@@ -99,6 +99,7 @@ class LLMClient:
         conversation_history: List[Dict[str, str]] = None,
         personality_prompt: str = None,
         guardrail_prompt: str = "",
+        identity_context: str = "",
         max_tokens: int = None,
         temperature: float = None
     ) -> str:
@@ -111,6 +112,7 @@ class LLMClient:
             conversation_history: Previous messages in the conversation
             personality_prompt: Custom personality instructions (uses config if None)
             guardrail_prompt: Safety/boundary instructions
+            identity_context: Identity-based tone instructions (for known friends/family)
             max_tokens: Maximum response length (uses config if None)
             temperature: Creativity level (uses config if None)
 
@@ -125,7 +127,8 @@ class LLMClient:
         system_content = self._build_system_prompt(
             personality_prompt or self.system_prompt,
             guardrail_prompt,
-            context
+            context,
+            identity_context
         )
 
         # Build messages array
@@ -161,7 +164,8 @@ class LLMClient:
         self,
         personality: str,
         guardrails: str,
-        context: str
+        context: str,
+        identity_context: str = ""
     ) -> str:
         """
         Construct the full system prompt.
@@ -170,6 +174,7 @@ class LLMClient:
             personality: Personality and style instructions
             guardrails: Safety boundaries
             context: Retrieved context from training data
+            identity_context: Dynamic tone instructions for recognized users
 
         Returns:
             Complete system prompt string
@@ -186,6 +191,10 @@ class LLMClient:
                 "Don't mention that you're retrieving or looking up information - "
                 "just share it naturally as if you know it."
             )
+
+        # Add identity context for recognized friends/family (enables relaxed tone)
+        if identity_context:
+            parts.append(identity_context)
 
         # Add any additional instructions from config
         additional = self.config.get("additional_instructions", "")

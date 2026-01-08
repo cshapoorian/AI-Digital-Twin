@@ -68,10 +68,17 @@ function ChatWindow({ messages, isLoading, error, onSendMessage }) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isLoading])
 
-  // Focus input on mount
+  // Focus input on mount and after loading completes
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
+
+  // Refocus input when AI finishes responding
+  useEffect(() => {
+    if (!isLoading) {
+      inputRef.current?.focus()
+    }
+  }, [isLoading])
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -79,6 +86,8 @@ function ChatWindow({ messages, isLoading, error, onSendMessage }) {
     if (input.trim() && !isLoading) {
       onSendMessage(input)
       setInput('')
+      // Refocus input after sending (use setTimeout for mobile compatibility)
+      setTimeout(() => inputRef.current?.focus(), 0)
     }
   }
 

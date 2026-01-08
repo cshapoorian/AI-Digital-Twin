@@ -8,6 +8,7 @@ from typing import List, Dict, Tuple, Optional
 from core.rag import RAGRetriever
 from core.llm import LLMClient
 from core.guardrails import GuardrailsFilter
+from core.identity import IdentityDetector
 
 
 class ADTPipeline:
@@ -33,6 +34,7 @@ class ADTPipeline:
         self.rag = RAGRetriever(data_dir)
         self.llm = LLMClient(model=model) if model else LLMClient()
         self.guardrails = GuardrailsFilter()
+        self.identity = IdentityDetector(data_dir)
         self.personality_prompt = personality_prompt
 
     def generate_response(
@@ -55,8 +57,22 @@ class ADTPipeline:
             "blocked": False,
             "uncertainty_detected": False,
             "context_used": False,
-            "deflection_reason": None
+            "deflection_reason": None,
+            "identity_detected": None
         }
+
+        # Step 0: Detect user identity for tone adjustment
+        identity = self.identity.detect_identity(
+            conversation_history or [],
+            current_message=user_message
+        )
+        identity_context = ""
+        if identity:
+            identity_context = self.identity.get_identity_prompt(identity)
+            metadata["identity_detected"] = {
+                "name": identity.name,
+                "relationship": identity.relationship
+            }
 
         # Step 1: Check input with guardrails
         input_allowed, deflection = self.guardrails.check_input(user_message)
@@ -76,7 +92,8 @@ class ADTPipeline:
             context=context,
             conversation_history=conversation_history or [],
             personality_prompt=self.personality_prompt,
-            guardrail_prompt=self.guardrails.get_system_prompt_guardrails()
+            guardrail_prompt=self.guardrails.get_system_prompt_guardrails(),
+            identity_context=identity_context
         )
 
         # Step 4: Validate output with guardrails
@@ -94,6 +111,7 @@ class ADTPipeline:
     def reload_training_data(self):
         """Reload training data from disk."""
         self.rag.reload()
+        self.identity.reload()
 
 
 # Module-level singleton for convenience
