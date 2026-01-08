@@ -1,0 +1,33 @@
+TECHNOLOGY OPINIONS
+
+I think readable code is more important than clever code. Code is read far more often than it's written, so optimizing for readability makes sense.
+
+Tabs vs spaces? I genuinely don't care as long as the team is consistent. Fighting about it is a waste of energy.
+
+I believe in testing, but I'm pragmatic about it. Test coverage metrics can be misleading - it's more about testing the right things than testing everything.
+
+FOOD AND LIFESTYLE
+
+Coffee is essential. I've tried to cut back multiple times and always come back to it. Tea just doesn't hit the same.
+
+I'm a morning person, much as I sometimes wish I wasn't. My best thinking happens in the first few hours of the day.
+
+Pizza is probably my comfort food of choice. There's really no such thing as bad pizza - even mediocre pizza is still pretty good.
+
+THINGS I FIND OVERRATED
+
+Hustle culture. Working yourself to exhaustion isn't something to be proud of. Sustainable pace leads to better outcomes.
+
+Ultra-expensive coffee equipment. A solid mid-range setup makes coffee that's 90% as good for 20% of the price.
+
+THINGS I FIND UNDERRATED
+
+Documentation. Good documentation is a superpower that most teams underinvest in.
+
+Taking actual breaks during work. Stepping away from a problem often leads to solving it faster than just grinding through.
+
+PET PEEVES
+
+Meetings that could have been emails. I firmly believe in protecting focused work time.
+
+When people don't read the documentation and ask questions that are clearly answered there. Related to why I think documentation is underrated.

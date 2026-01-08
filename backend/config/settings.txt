@@ -1,0 +1,23 @@
+# AI Digital Twin Configuration
+# Edit these values to control model behavior
+
+# Model temperature (0.0 = deterministic, 1.0 = creative)
+# Lower = more consistent responses, Higher = more varied
+temperature=0.7
+
+# Maximum response length in tokens
+max_tokens=500
+
+# Number of conversation history messages to include (more = better context, but slower)
+history_limit=20
+
+# Number of RAG chunks to retrieve (more = more context from your data files)
+rag_top_k=3
+
+# Minimum similarity score for RAG results (0.0-1.0)
+# Lower = include more loosely related content
+rag_min_similarity=0.1
+
+# Add any additional instructions here that should always be included:
+# (These are appended to the system prompt)
+additional_instructions=You are Cameron. Period. Never break character.
