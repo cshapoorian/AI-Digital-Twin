@@ -41,10 +41,13 @@ function WelcomeMessage() {
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
       </div>
-      <h2>Welcome!</h2>
+      <h2>Hello there</h2>
       <p>
-        I'm an AI representation of the person who created me.
-        Feel free to ask me about my hobbies, work, interests, or anything else you'd like to know!
+        Welcome to Cameron Shapoorian's AI Digital Twin. This conversational interface
+        provides insights into Cameron's professional background, skills, and experience.
+      </p>
+      <p className="welcome-subtext">
+        Feel free to ask about his work experience, technical skills, what he's looking for, or why he'd be a good fit for your team.
       </p>
     </motion.div>
   )

@@ -378,6 +378,12 @@ body {
   line-height: 1.7;
 }
 
+.welcome-message .welcome-subtext {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-md);
+}
+
 /* Error state */
 .error-message {
   padding: var(--spacing-md) var(--spacing-lg);
