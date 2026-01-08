@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import { motion } from 'framer-motion'
 
 /**
  * Format timestamp for display
@@ -24,14 +25,20 @@ function MessageBubble({ message }) {
   const isUser = message.role === 'user'
 
   return (
-    <div className={`message message--${message.role}`}>
+    <motion.div
+      className={`message message--${message.role}`}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      layout
+    >
       <div className="message-bubble">
         {message.content}
       </div>
       <span className="message-time">
         {formatTime(message.timestamp)}
       </span>
-    </div>
+    </motion.div>
   )
 }
 

@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import MessageBubble from './MessageBubble'
 
 /**
@@ -11,11 +12,16 @@ import MessageBubble from './MessageBubble'
  */
 function TypingIndicator() {
   return (
-    <div className="typing-indicator">
+    <motion.div
+      className="typing-indicator"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+    >
       <div className="typing-dot"></div>
       <div className="typing-dot"></div>
       <div className="typing-dot"></div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -24,13 +30,23 @@ function TypingIndicator() {
  */
 function WelcomeMessage() {
   return (
-    <div className="welcome-message">
+    <motion.div
+      className="welcome-message"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="welcome-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
       <h2>Welcome!</h2>
       <p>
         I'm an AI representation of the person who created me.
         Feel free to ask me about my hobbies, work, interests, or anything else you'd like to know!
       </p>
-    </div>
+    </motion.div>
   )
 }
 
@@ -75,23 +91,39 @@ function ChatWindow({ messages, isLoading, error, onSendMessage }) {
   }
 
   return (
-    <div className="chat-container">
+    <motion.div
+      className="chat-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+    >
       <div className="chat-messages">
-        {messages.length === 0 ? (
-          <WelcomeMessage />
-        ) : (
-          messages.map((message) => (
-            <MessageBubble key={message.id} message={message} />
-          ))
-        )}
+        <AnimatePresence mode="popLayout">
+          {messages.length === 0 ? (
+            <WelcomeMessage key="welcome" />
+          ) : (
+            messages.map((message) => (
+              <MessageBubble key={message.id} message={message} />
+            ))
+          )}
+        </AnimatePresence>
 
-        {isLoading && <TypingIndicator />}
+        <AnimatePresence>
+          {isLoading && <TypingIndicator key="typing" />}
+        </AnimatePresence>
 
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              className="error-message"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+            >
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div ref={messagesEndRef} />
       </div>
@@ -109,16 +141,21 @@ function ChatWindow({ messages, isLoading, error, onSendMessage }) {
             disabled={isLoading}
             maxLength={2000}
           />
-          <button
+          <motion.button
             type="submit"
             className="chat-submit"
             disabled={isLoading || !input.trim()}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            Send
-          </button>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </motion.button>
         </form>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

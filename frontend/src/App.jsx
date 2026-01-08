@@ -1,10 +1,11 @@
 /**
- * App component - root component for the AI Digital Twin frontend.
- * Provides the main layout with chat window and notes section.
+ * App component - root component for the AI Doppelganger frontend.
+ * Provides the main layout with a modern, centered chat interface.
  */
 
 import React from 'react'
-import { ChatWindow, NotesSection } from './components'
+import { motion } from 'framer-motion'
+import { ChatWindow } from './components'
 import { useChat } from './hooks/useChat'
 
 /**
@@ -15,19 +16,29 @@ import { useChat } from './hooks/useChat'
  */
 function Header({ onNewChat, hasMessages }) {
   return (
-    <header className="header">
+    <motion.header
+      className="header"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="header-content">
-        <div>
-          <h1>AI Digital Twin</h1>
+        <div className="header-text">
+          <h1>AI Doppelganger</h1>
           <p>Chat with my AI representation to learn more about me</p>
         </div>
         {hasMessages && (
-          <button className="new-chat-btn" onClick={onNewChat}>
+          <motion.button
+            className="new-chat-btn"
+            onClick={onNewChat}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             New Chat
-          </button>
+          </motion.button>
         )}
       </div>
-    </header>
+    </motion.header>
   )
 }
 
@@ -39,14 +50,16 @@ function App() {
 
   return (
     <div className="app">
-      <Header onNewChat={clearConversation} hasMessages={messages.length > 0} />
-      <ChatWindow
-        messages={messages}
-        isLoading={isLoading}
-        error={error}
-        onSendMessage={sendMessage}
-      />
-      <NotesSection />
+      <div className="background-gradient" />
+      <div className="app-container">
+        <Header onNewChat={clearConversation} hasMessages={messages.length > 0} />
+        <ChatWindow
+          messages={messages}
+          isLoading={isLoading}
+          error={error}
+          onSendMessage={sendMessage}
+        />
+      </div>
     </div>
   )
 }
