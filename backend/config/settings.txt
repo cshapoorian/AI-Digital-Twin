@@ -6,7 +6,7 @@
 temperature=0.5
 
 # Maximum response length in tokens
-max_tokens=500
+max_tokens=200
 
 # Number of conversation history messages to include (more = better context, but slower)
 history_limit=20
