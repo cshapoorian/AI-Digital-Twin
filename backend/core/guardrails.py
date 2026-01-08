@@ -33,6 +33,12 @@ class GuardrailsFilter:
         # Sensitive personal topics
         r"\b(salary|income|net worth|how much.*make|how much.*earn)\b",
         r"\b(address|where.*live|phone number|social security)\b",
+
+        # Questions requiring speculation (no documented answers)
+        r"\b(biggest\s+)?weakness(es)?\b",
+        r"\b(biggest\s+)?strength(s)?\b(?!.*snowboard|.*soccer|.*cook)",
+        r"\bwhy should (we|i) hire\b",
+        r"\bwhere.*see yourself.*(\d+|five|ten)\s*(year)?\b",
     ]
 
     # Jailbreak/prompt injection attempts

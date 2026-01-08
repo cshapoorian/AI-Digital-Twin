@@ -1,0 +1,132 @@
+# Questions Your Digital Twin Cannot Answer (Yet)
+
+Fill in your answers below. Once complete, you can add this content to your
+training data files in backend/data/ to improve the model's responses.
+
+================================================================================
+COMMON RECRUITER QUESTIONS
+================================================================================
+
+1. What is your biggest weakness?
+   YOUR ANSWER:
+
+
+2. What is your biggest strength?
+   YOUR ANSWER:
+
+
+3. Why should we hire you?
+   YOUR ANSWER:
+
+
+4. Where do you see yourself in 5 years?
+   YOUR ANSWER:
+
+
+5. Why did you leave your last job? / Why are you looking for a new opportunity?
+   YOUR ANSWER:
+
+
+6. What was your GPA in college?
+   YOUR ANSWER:
+
+
+7. Tell me about a time you failed and what you learned.
+   YOUR ANSWER:
+
+
+8. Tell me about a conflict with a coworker and how you resolved it.
+   YOUR ANSWER:
+
+
+9. How do you handle stress or tight deadlines?
+   YOUR ANSWER:
+
+
+10. What motivates you?
+    YOUR ANSWER:
+
+
+11. Describe your ideal work environment.
+    YOUR ANSWER:
+
+
+12. What questions do you have for us? (typical questions you ask interviewers)
+    YOUR ANSWER:
+
+
+================================================================================
+TECHNICAL QUESTIONS
+================================================================================
+
+13. Walk me through a challenging technical problem you solved.
+    YOUR ANSWER:
+
+
+14. Tell me about your experience at Wavelynx in more detail.
+    YOUR ANSWER:
+
+
+15. Tell me about your experience at Bland AI in more detail.
+    YOUR ANSWER:
+
+
+16. What was your favorite project and why?
+    YOUR ANSWER:
+
+
+17. How do you stay current with technology trends?
+    YOUR ANSWER:
+
+
+18. What's your experience with Agile/Scrum methodologies?
+    YOUR ANSWER:
+
+
+================================================================================
+PERSONAL/BEHAVIORAL
+================================================================================
+
+19. Tell me about yourself (your preferred "elevator pitch").
+    YOUR ANSWER:
+
+
+20. What are you passionate about outside of work?
+    YOUR ANSWER:
+
+
+21. How would your previous coworkers describe you?
+    YOUR ANSWER:
+
+
+22. What's a professional accomplishment you're most proud of?
+    YOUR ANSWER:
+
+
+================================================================================
+ROLE-SPECIFIC (FDE/Solutions Engineer)
+================================================================================
+
+23. Why are you interested in a customer-facing technical role?
+    YOUR ANSWER:
+
+
+24. Describe a time you explained a complex technical concept to a non-technical person.
+    YOUR ANSWER:
+
+
+25. How do you balance customer needs with engineering constraints?
+    YOUR ANSWER:
+
+
+================================================================================
+INSTRUCTIONS
+================================================================================
+
+After filling this out:
+1. Copy relevant answers into backend/data/interview_responses.txt (create it)
+2. Restart the backend server to reload training data
+3. Test the questions again to verify improved responses
+
+NOTE: Keep answers concise but authentic - the model works best with genuine,
+conversational responses rather than overly polished corporate-speak.

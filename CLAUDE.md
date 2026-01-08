@@ -7,6 +7,10 @@ I'm looking for this to be a short side project so make everything super modular
 
 Your role is to be a senior software engineer with over 30 years of experience. You know everything about web development, web hosting, and AI models and agentic frameworks. Code as such and be well informed about everything you write.
 
+FULLY TEST EVERYTHING THAT IS ADDED AND ITERATE AS NEEDED FOR FULL FUNCTIONALITY
+
+DO NOT ASK ME WHAT YOU HAVE ACCESS TO DO. UNLESS EXPLICITLY STATED OR HAS THE POTNETIAL OF ALTERING THE STRUCTURE OF THE PROJECT JUST GO AHEAD AND DO IT. DO NOT EDIT THE TRAINING SETS
+
 ## Project Overview
 
 This project is an AI Digital Twin (ADT) - a conversational web app that represents the owner's personality, knowledge, and communication style. Users can chat with the ADT to learn about the owner.

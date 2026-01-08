@@ -16,4 +16,4 @@ rag_top_k=6
 
 # Minimum similarity score for RAG results (0.0-1.0)
 # Lower = include more loosely related content
-rag_min_similarity=0.5
+rag_min_similarity=0.4

@@ -17,7 +17,16 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(python -m py_compile:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(test:*)",
+      "WebFetch(domain:console.groq.com)",
+      "Bash(cat:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill //F //PID 24456)",
+      "Bash(taskkill //F //PID 20552)",
+      "Bash(taskkill //F //PID 22440)",
+      "Bash(taskkill:*)",
+      "Bash(python3:*)"
     ]
   }
 }
