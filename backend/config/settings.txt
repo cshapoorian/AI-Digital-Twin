@@ -12,8 +12,8 @@ max_tokens=500
 history_limit=20
 
 # Number of RAG chunks to retrieve (more = more context from your data files)
-rag_top_k=10
+rag_top_k=6
 
 # Minimum similarity score for RAG results (0.0-1.0)
 # Lower = include more loosely related content
-rag_min_similarity=0.1
+rag_min_similarity=0.5
