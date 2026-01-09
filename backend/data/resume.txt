@@ -1,54 +1,47 @@
 Cameron Shapoorian
 (415) 810-4263 | cshapoorian@gmail.com | linkedin.com/in/cameron-shapoorian/
 
-PROFESSIONAL EXPERIENCE
+Professional Experience 
+Forward Deployed Engineer									Oct - Nov 2025
+Bland AI — San Francisco, CA
+Delivered client-facing AI workflow integrations and technical improvements across two client deployments.
+Built full end-to-end, API-driven workflows using JavaScript and our AI platform to automate customer operations.
+Scoped ambiguous customer problems into structured engineering tasks to accelerate delivery.
+Improved onboarding by codifying repeatable processes into concise documentation.
+Lead Test Automation Engineer								    Jun 2022 - Oct 2025
+Wavelynx — Denver, CO
+Delivered 3 successful hardware products and subsequent updates, owning cross-functional technical execution.
+Reduced 6 month manual hardware/firmware testing cycle to a 2 week automated cycle.
+Led a team of 5 engineers and 5 technicians through product launches and project development.
+Created and maintained a production-grade automated testing platform using Python, C, and RS-485.
+Defined product requirements, launch timelines, executive summaries for C-Suite, praised for clarity.
+Collaborated directly with enterprise clients on technical integrations, shaping product expectations and delivery.
+Onboarded 22 employees with product training and technical knowledge.
+Served as a key product knowledge resource for C-Suite and cross-functional teams, improving alignment across the org.
+Influencing product and testing strategy by presenting technical insights and improvements to executive leadership.
+Project Manager Intern 								               Jun 2020 - Aug 2020
+UNICEF USA— New York City, New York
+Collaborated with Digital Tech, IT, and Security teams to lay the groundwork for a major website refresh.
+Utilized Agile methodology with Jira and Atlassian tools to track progress and manage sprints.
+Coordinated with senior leadership for meeting scheduling and project approvals.
+Supported a website refresh initiative which improved user engagement and philanthropic support.
 
-Forward Deployed Engineer Oct - Nov 2025
-Bland AI - San Francisco, CA
-- Delivered client-facing AI workflow integrations and technical improvements across two client deployments.
-- Built full end-to-end, API-driven workflows using JavaScript and our AI platform to automate customer operations.
-- Scoped ambiguous customer problems into structured engineering tasks to accelerate delivery.
-- Improved onboarding by codifying repeatable processes into concise documentation.
-
-Lead Test Automation Engineer Jun 2022 - Oct 2025
-Wavelynx - Denver, CO
-- Delivered 3 successful hardware products and subsequent updates, owning cross-functional technical execution.
-- Reduced 6 month manual hardware/firmware testing cycle to a 2 week automated cycle.
-- Led a team of 5 engineers and 5 technicians through product launches and project development.
-- Created and maintained a production-grade automated testing platform using Python, C, and RS-485.
-- Defined product requirements, launch timelines, executive summaries for C-Suite, praised for clarity.
-- Collaborated directly with enterprise clients on technical integrations, shaping product expectations and delivery.
-- Onboarded 22 employees with product training and technical knowledge.
-- Served as a key product knowledge resource for C-Suite and cross-functional teams, improving alignment across the org.
-- Influencing product and testing strategy by presenting technical insights and improvements to executive leadership.
-
-Project Manager Intern Jun 2020 - Aug 2020
-UNICEF USA - New York City, New York
-- Collaborated with Digital Tech, IT, and Security teams to lay the groundwork for a major website refresh.
-- Utilized Agile methodology with Jira and Atlassian tools to track progress and manage sprints.
-- Coordinated with senior leadership for meeting scheduling and project approvals.
-- Supported a website refresh initiative which improved user engagement and philanthropic support.
-
-EDUCATION
-
+Education
 School of Engineering and Applied Sciences, University of Colorado
 Computer Science, Bachelor of Science
 Relevant Coursework: Algorithms, Databases, Physics, Computer Systems, Quantum Computing, Differential Equations.
 
-PROJECTS & CONSULTING
-
-AI Digital Twin: Built a full-stack conversational AI web app using React, FastAPI, Python, and Groq API. Features include RAG-based retrieval, TF-IDF similarity search, SQLite database, rate limiting, analytics tracking, and a custom guardrails system. Deployed on Vercel (frontend) and Render (backend).
+Projects & Consulting
+AI Digital Twin: Created a chat bot using React, FastAPI, SQLite, RAG, Open Source Models, and Guardrails
 AI + IoT Integration: Created an LLM-powered project using MCP to remotely interface with IoT devices.
-Access Control Integration: Provided technical consulting to improve physical access control for residential buildings.
-Safety Mobile App: Advised an early-stage team on safety, security, access-control, and product decisions.
+Safety Mobile App: Advised an early-stage team on software and machine learning implementation.
 
-SKILLS & CERTIFICATIONS
-
-Core Programming: Python, Javascript, Typescript, React, NodeJS, SQL, C, Assembly, HTML, CSS.
+Skills & Certifications
+Core Programming: Python (PyTorch, React, TensorFlow), Javascript (NodeJS), Typescript, SQL, C, Assembly.
 AI Experience: LLM-based workflow design, prompt/context strategy, API integrations (MCP, Llama, other open source).
-Certifications: Stanford Online's Machine Learning Specialization Set (2026), COMPTIA Security+ (2024).
+Certifications: Stanford Online’s Machine Learning Specialization Set (2026), COMPTIA Security+ (2024).
 
-COMMUNITY & LEADERSHIP
-
+Community & Leadership
 Eagle Scout - Troop 243, Lafayette, CA
 Eagle Project, Multi-year Camp Counselor and Area Director, NYLT Graduate and Counselor, Community Service
+
