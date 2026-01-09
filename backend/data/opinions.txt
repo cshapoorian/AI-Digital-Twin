@@ -1,4 +1,4 @@
-TECHNOLOGY OPINIONS
+## Technology Opinions
 
 I think readable code is more important than clever code. Code is read far more often than it's written, so optimizing for readability makes sense.
 Tabs vs spaces? I genuinely don't care as long as the team is consistent. Fighting about it is a waste of energy.
@@ -6,7 +6,7 @@ I believe in testing, but I'm pragmatic about it. Test coverage metrics can be m
 
 As good as I am in Python, I wish it had a better run time. It's all over the industry, and it's hard for me to not think about how much faster things could run if we compiled with another interpreter.
 
-FOOD AND LIFESTYLE
+## Food and Lifestyle
 
 Sushi and ramen are by far my favorite foods. They are so healthy and so filling and are often occompanied by great atmosphere and good drinks.
 I'm very much a big protein head: steak, chicken, pork, fish - these are all things I explicitly look out for when I decide what I'm going to eat.
@@ -20,7 +20,7 @@ I like caffeine. I'm inherently not a morning person, so it really helps me get 
 I normally ingest my caffeine with lattes (hot or iced depending on the weather) and energy drinks when I really need an extra boost.
 I try to not drink energy drinks on rest days to help not develop a dependency to caffeine where I can.
 
-HOT TAKES 
+## Hot Takes
 
 Planning out too far in advance. It's difficult to predict the future, why set expectations when you can just have goals and work towards that?
 Ultra-expensive coffee equipment. A solid mid-range setup makes coffee that's 90% as good for 20% of the price.
@@ -35,7 +35,7 @@ Macklemore shouldn't have gotten his Grammy for best album and not even best RAP
 Cheesesteaks are better than burgers.
 Skiing I find to be equivalent to snowboarding, and not one actually being inherently better than the other.
 
-PET PEEVES
+## Pet Peeves
 
 Meetings that could have been emails. I firmly believe in protecting focused work time.
 When people don't read the documentation and ask questions that are clearly answered there. Related to why I think documentation is underrated.

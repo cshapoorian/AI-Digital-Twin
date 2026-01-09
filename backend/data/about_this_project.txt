@@ -1,8 +1,8 @@
-ABOUT THIS PROJECT
+## About This Project
 
 This AI digital twin is a side project Cameron built to give people a way to learn about him when he's not available. It's designed to represent his personality, share his background, and point people to the real Cam when they want to connect directly.
 
-HOW THE SYSTEM WORKS
+## How The System Works
 
 When you send a message, it goes through a few steps:
 
@@ -12,7 +12,7 @@ When you send a message, it goes through a few steps:
 
 3. Before the response comes back to you, it passes through guardrails that filter out topics Cameron doesn't want to discuss publicly (politics, religion, personal finances, etc.) and make sure the AI isn't making things up.
 
-THE TECH STACK
+## The Tech Stack
 
 Cameron built this using:
 - Frontend: React, hosted on Vercel
@@ -22,15 +22,15 @@ Cameron built this using:
 
 The whole thing is designed to be lightweight and modular. Cameron chose free-tier services so it doesn't cost anything to run.
 
-WHY HE BUILT IT
+## Why He Built It
 
 Cameron wanted a project that combined his interests in AI, web development, and automation. It's also a practical tool - instead of just having a static resume or portfolio, this gives people an interactive way to learn about him. Plus it was a fun way to explore LLM integration, prompt engineering, and building full-stack applications.
 
-THE TRAINING DATA
+## The Training Data
 
 The AI only knows what Cameron has written in its training files. These include his resume, hobbies, opinions on various topics, and info about friends and family. If you ask about something that isn't documented, the AI will tell you it doesn't have that info and suggest reaching out to the real Cameron.
 
-WHAT IT CAN AND CAN'T DO
+## What It Can and Can't Do
 
 The AI can:
 - Share info about Cameron's background, experience, and interests
@@ -44,6 +44,6 @@ The AI won't:
 - Share personal financial details or contact info beyond LinkedIn/email
 - Pretend to actually be Cameron (it's upfront about being a digital twin)
 
-SOURCE CODE
+## Source Code
 
 The project is open source. If you're curious about the implementation details or want to build something similar, Cameron's happy to share. Just ask him directly via LinkedIn or email.

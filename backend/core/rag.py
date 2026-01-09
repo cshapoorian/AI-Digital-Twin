@@ -35,9 +35,8 @@ class RAGRetriever:
         self.chunks: List[Tuple[str, str]] = []  # (chunk_text, source_file)
         self.vectorizer = TfidfVectorizer(
             stop_words="english",
-            max_features=1000,
             ngram_range=(1, 2)  # Unigrams and bigrams for better matching
-        )
+        )  # No max_features limit - we don't have enough data to need it
         self.tfidf_matrix = None
         self._load_data()
 
@@ -70,8 +69,8 @@ class RAGRetriever:
 
     def _split_into_chunks(self, content: str, source: str) -> List[Tuple[str, str]]:
         """
-        Split content into chunks based on paragraphs.
-        Filters out very short chunks that lack meaningful content.
+        Split content into chunks based on sections (## headers) or paragraphs.
+        Keeps section headers with their content for better retrieval.
 
         Args:
             content: Full text content
@@ -80,15 +79,42 @@ class RAGRetriever:
         Returns:
             List of (chunk_text, source_file) tuples
         """
-        # Split by double newlines (paragraphs) or section breaks
-        paragraphs = re.split(r'\n\s*\n', content)
-
         chunks = []
-        for para in paragraphs:
-            # Clean and validate chunk
-            cleaned = para.strip()
-            if len(cleaned) > 50:  # Skip very short chunks
-                chunks.append((cleaned, source))
+
+        # First, try to split by ## headers (keeps header with content)
+        sections = re.split(r'\n(?=## )', content)
+
+        for section in sections:
+            section = section.strip()
+            if not section:
+                continue
+
+            # If section starts with ##, it's a headed section - keep it together
+            if section.startswith('## ') or section.startswith('# '):
+                # Merge short consecutive paragraphs within the section
+                if len(section) > 50:
+                    chunks.append((section, source))
+            else:
+                # For non-headed content, split by paragraphs but merge small ones
+                paragraphs = re.split(r'\n\s*\n', section)
+                current_chunk = ""
+
+                for para in paragraphs:
+                    para = para.strip()
+                    if not para:
+                        continue
+
+                    # Merge short paragraphs together
+                    if len(current_chunk) + len(para) < 500:
+                        current_chunk = f"{current_chunk}\n\n{para}".strip()
+                    else:
+                        if len(current_chunk) > 50:
+                            chunks.append((current_chunk, source))
+                        current_chunk = para
+
+                # Don't forget the last chunk
+                if len(current_chunk) > 50:
+                    chunks.append((current_chunk, source))
 
         return chunks
 

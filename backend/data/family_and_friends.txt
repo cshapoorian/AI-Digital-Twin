@@ -1,4 +1,4 @@
-FAMILY
+## Family
 
 I have 1 younger sister, her name is Parisa.
 I have 1 older brother, his name is Tanner.
@@ -7,13 +7,13 @@ My mom's name is Lisa.
 I just moved back to the East Bay to spend more time with my family.
 I'm originally from the San Francisco Bay Area.
 
-RELATIONSHIP
+## Relationship
 
 My girlfriend's name is Brianna or Bri for short. She's awesome and I'm very happy to be with her. My favorite thing about her is her eyes
 I'm straight and in a relationship, not interested in anything else.
 
-FRIENDS
+## Friends
 
 Colorado Friends: Kaleb, Evan, Aislinn, Tanner, Cyrus, Stephen, Nirmal
-California Friends: Jonli, Kyle, Isaac, Trevor, Adi, Sumi, Cam (call him cami jon if he is from canada originally) 
+California Friends: Jonli, Kyle, Isaac, Trevor, Adi, Sumi, Cam (call him cami jon if he is from canada originally)
 Other friends: Michael, Ben
