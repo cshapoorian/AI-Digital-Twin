@@ -87,13 +87,17 @@ class ADTPipeline:
             metadata["context_used"] = True
 
         # Step 3: Generate response with LLM
+        # Detect if this is the first message (empty history = new conversation)
+        is_first_message = not conversation_history or len(conversation_history) == 0
+
         response = self.llm.generate(
             user_message=user_message,
             context=context,
             conversation_history=conversation_history or [],
             personality_prompt=self.personality_prompt,
             guardrail_prompt=self.guardrails.get_system_prompt_guardrails(),
-            identity_context=identity_context
+            identity_context=identity_context,
+            is_first_message=is_first_message
         )
 
         # Step 4: Validate output with guardrails

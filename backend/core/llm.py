@@ -11,6 +11,24 @@ from typing import List, Dict, Optional
 from groq import Groq
 
 
+# Engagement instructions - placed last in system prompt for maximum weight
+ENGAGEMENT_PROMPT = """
+FIRST MESSAGE FORMAT (MANDATORY):
+
+When this is the first message in a conversation, your response MUST end by asking who they are and what brings them here. This applies even if they ask a question first.
+
+CORRECT EXAMPLES:
+- User: "hey" → "Hey! Who am I chatting with, and what brings you by?"
+- User: "what do you do?" → "I'm a software engineer focused on test automation and AI. Who am I talking to, and what brings you here?"
+- User: "what languages do you know?" → "Python, JavaScript, TypeScript, and a few others. What's your name and what brings you by?"
+
+INCORRECT (never do this on first message):
+- User: "what do you do?" → "I'm a software engineer with experience in..." (missing the question!)
+
+Keep initial answers brief (1-2 sentences) to make room for asking about them. After you learn who they are, respond naturally without asking in every message.
+""".strip()
+
+
 def load_config():
     """Load settings from config/settings.txt file."""
     config_path = Path(__file__).parent.parent / "config" / "settings.txt"
@@ -101,7 +119,8 @@ class LLMClient:
         guardrail_prompt: str = "",
         identity_context: str = "",
         max_tokens: int = None,
-        temperature: float = None
+        temperature: float = None,
+        is_first_message: bool = False
     ) -> str:
         """
         Generate a response using the LLM.
@@ -115,6 +134,7 @@ class LLMClient:
             identity_context: Identity-based tone instructions (for known friends/family)
             max_tokens: Maximum response length (uses config if None)
             temperature: Creativity level (uses config if None)
+            is_first_message: Whether this is the first message in the conversation
 
         Returns:
             The generated response text
@@ -128,7 +148,8 @@ class LLMClient:
             personality_prompt or self.system_prompt,
             guardrail_prompt,
             context,
-            identity_context
+            identity_context,
+            is_first_message
         )
 
         # Build messages array
@@ -151,7 +172,25 @@ class LLMClient:
                 max_tokens=max_tokens,
                 temperature=temperature
             )
-            return response.choices[0].message.content
+            response_text = response.choices[0].message.content
+
+            # For first messages, append the question if the model didn't include it
+            if is_first_message and response_text:
+                # Check if response already asks who they are
+                lower_response = response_text.lower()
+                has_who_question = any(phrase in lower_response for phrase in [
+                    "who am i talking to",
+                    "who am i chatting with",
+                    "who are you",
+                    "what's your name",
+                    "what brings you",
+                    "what brings you here",
+                    "what brings you by"
+                ])
+                if not has_who_question:
+                    response_text = response_text.rstrip() + " Who am I talking to, and what brings you here?"
+
+            return response_text
 
         except Exception as e:
             print(f"LLM API error: {e}")
@@ -165,7 +204,8 @@ class LLMClient:
         personality: str,
         guardrails: str,
         context: str,
-        identity_context: str = ""
+        identity_context: str = "",
+        is_first_message: bool = False
     ) -> str:
         """
         Construct the full system prompt.
@@ -175,6 +215,7 @@ class LLMClient:
             guardrails: Safety boundaries
             context: Retrieved context from training data
             identity_context: Dynamic tone instructions for recognized users
+            is_first_message: Whether this is the first message in conversation
 
         Returns:
             Complete system prompt string
@@ -200,6 +241,9 @@ class LLMClient:
         additional = self.config.get("additional_instructions", "")
         if additional:
             parts.append(additional)
+
+        # Add engagement instructions LAST for maximum weight
+        parts.append(ENGAGEMENT_PROMPT)
 
         return "\n\n".join(parts)
 
