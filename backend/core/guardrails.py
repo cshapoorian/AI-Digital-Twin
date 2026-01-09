@@ -17,7 +17,7 @@ class GuardrailsFilter:
     Provides both blocking and soft warnings.
     """
 
-    # Topics to avoid - will trigger deflection
+    # Topics to block in BOTH input and output
     BLOCKED_TOPICS = [
         # Political terms
         r"\b(democrat|republican|liberal|conservative|trump|biden|election|vote|voting)\b",
@@ -33,8 +33,11 @@ class GuardrailsFilter:
         # Sensitive personal topics
         r"\b(salary|income|net worth|how much.*make|how much.*earn)\b",
         r"\b(address|where.*live|phone number|social security)\b",
+    ]
 
-        # Questions requiring speculation (no documented answers)
+    # Topics to block in INPUT ONLY (interview traps - but these words may appear
+    # naturally in legitimate responses, so don't filter them from output)
+    INPUT_ONLY_BLOCKED = [
         r"\b(biggest\s+)?weakness(es)?\b",
         r"\b(biggest\s+)?strength(s)?\b(?!.*snowboard|.*soccer|.*cook)",
         r"\bwhy should (we|i) hire\b",
@@ -153,6 +156,10 @@ class GuardrailsFilter:
             re.compile(pattern, re.IGNORECASE)
             for pattern in self.BLOCKED_TOPICS
         ]
+        self._input_only_blocked_patterns = [
+            re.compile(pattern, re.IGNORECASE)
+            for pattern in self.INPUT_ONLY_BLOCKED
+        ]
         self._inappropriate_patterns = [
             re.compile(pattern, re.IGNORECASE)
             for pattern in self.INAPPROPRIATE_PATTERNS
@@ -192,8 +199,13 @@ class GuardrailsFilter:
             if pattern.search(user_message):
                 return False, self.MANIPULATION_RESPONSE
 
-        # Check for blocked topics
+        # Check for blocked topics (applies to both input and output)
         for pattern in self._blocked_patterns:
+            if pattern.search(user_message):
+                return False, self.DEFLECTION_RESPONSE
+
+        # Check for input-only blocked topics (interview traps, etc.)
+        for pattern in self._input_only_blocked_patterns:
             if pattern.search(user_message):
                 return False, self.DEFLECTION_RESPONSE
 
