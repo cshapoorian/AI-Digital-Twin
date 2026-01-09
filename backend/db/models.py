@@ -63,9 +63,27 @@ class Feedback(Base):
     conversation_id = Column(String(36), nullable=True)  # Optional link to conversation
     user_message = Column(Text, nullable=False)
     assistant_response = Column(Text, nullable=True)
-    feedback_type = Column(String(20), nullable=False)  # 'unanswered', 'inappropriate', 'inaccurate'
+    feedback_type = Column(String(20), nullable=False)  # 'unanswered', 'inappropriate', 'inaccurate', 'helpful', 'unhelpful'
     notes = Column(Text, nullable=True)  # Additional context
+    rating = Column(String(10), nullable=True)  # 'positive' or 'negative' for thumbs up/down
     created_at = Column(DateTime, server_default=func.now())
 
     def __repr__(self):
         return f"<Feedback(id={self.id}, type={self.feedback_type})>"
+
+
+class Analytics(Base):
+    """
+    Simple analytics tracking for visits and messages.
+    Privacy-friendly: no personal data, just event counts.
+    """
+    __tablename__ = "analytics"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    event_type = Column(String(20), nullable=False)  # 'visit', 'message', 'feedback'
+    session_id = Column(String(36), nullable=True)  # Anonymous session tracking
+    event_data = Column(Text, nullable=True)  # JSON string for extra data
+    created_at = Column(DateTime, server_default=func.now())
+
+    def __repr__(self):
+        return f"<Analytics(id={self.id}, type={self.event_type})>"

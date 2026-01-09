@@ -1,9 +1,10 @@
 /**
  * Custom hook for managing chat state and API communication.
- * Handles message sending, loading states, and conversation persistence.
+ * Handles message sending, loading states, conversation persistence,
+ * feedback, retry, and analytics tracking.
  */
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 // Generate a UUID for conversation tracking
 const generateId = () => {
@@ -14,18 +15,65 @@ const generateId = () => {
   })
 }
 
-// Get or create conversation ID from session storage
+// Storage keys
+const STORAGE_KEYS = {
+  conversationId: 'adt_conversationId',
+  messages: 'adt_messages',
+  feedbackState: 'adt_feedbackState',
+}
+
+// Get or create conversation ID from localStorage
 const getConversationId = () => {
-  let id = sessionStorage.getItem('conversationId')
+  let id = localStorage.getItem(STORAGE_KEYS.conversationId)
   if (!id) {
     id = generateId()
-    sessionStorage.setItem('conversationId', id)
+    localStorage.setItem(STORAGE_KEYS.conversationId, id)
   }
   return id
 }
 
+// Load messages from localStorage
+const loadMessages = () => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEYS.messages)
+    return stored ? JSON.parse(stored) : []
+  } catch {
+    return []
+  }
+}
+
+// Load feedback state from localStorage
+const loadFeedbackState = () => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEYS.feedbackState)
+    return stored ? JSON.parse(stored) : {}
+  } catch {
+    return {}
+  }
+}
+
 // API base URL - uses proxy in dev, env var in production
 const API_URL = import.meta.env.VITE_API_URL || ''
+
+/**
+ * Track an analytics event
+ */
+const trackEvent = async (eventType, sessionId, metadata = null) => {
+  try {
+    await fetch(`${API_URL}/api/analytics`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_type: eventType,
+        session_id: sessionId,
+        metadata,
+      }),
+    })
+  } catch (err) {
+    // Silent fail for analytics
+    console.debug('Analytics tracking failed:', err)
+  }
+}
 
 /**
  * useChat hook - manages chat functionality
@@ -33,14 +81,34 @@ const API_URL = import.meta.env.VITE_API_URL || ''
  * @returns {Object} Chat state and functions
  */
 export function useChat() {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState(loadMessages)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [conversationId, setConversationId] = useState(getConversationId)
+  const [feedbackState, setFeedbackState] = useState(loadFeedbackState)
+  const lastUserMessageRef = useRef(null)
+  const hasTrackedVisit = useRef(false)
 
-  // Check backend health on mount
+  // Persist messages to localStorage whenever they change
   useEffect(() => {
-    const checkHealth = async () => {
+    localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(messages))
+  }, [messages])
+
+  // Persist feedback state to localStorage
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.feedbackState, JSON.stringify(feedbackState))
+  }, [feedbackState])
+
+  // Track visit on mount and check backend health
+  useEffect(() => {
+    const init = async () => {
+      // Track visit (only once per session)
+      if (!hasTrackedVisit.current) {
+        hasTrackedVisit.current = true
+        trackEvent('visit', conversationId)
+      }
+
+      // Health check
       try {
         const response = await fetch(`${API_URL}/api/health`)
         if (!response.ok) {
@@ -50,8 +118,8 @@ export function useChat() {
         setError('Unable to connect to the server. Please try again later.')
       }
     }
-    checkHealth()
-  }, [])
+    init()
+  }, [conversationId])
 
   /**
    * Send a message and get AI response
@@ -62,6 +130,9 @@ export function useChat() {
 
     // Clear any previous error
     setError(null)
+
+    // Store for potential retry
+    lastUserMessageRef.current = content.trim()
 
     // Add user message to state immediately
     const userMessage = {
@@ -98,6 +169,9 @@ export function useChat() {
 
       const data = await response.json()
 
+      // Track message event
+      trackEvent('message', conversationId)
+
       // Add assistant response to state
       const assistantMessage = {
         id: generateId(),
@@ -127,25 +201,61 @@ export function useChat() {
   }, [messages, isLoading, conversationId])
 
   /**
+   * Retry the last failed message
+   */
+  const retryLastMessage = useCallback(() => {
+    if (!lastUserMessageRef.current) return
+
+    // Remove the last two messages (user message and error response)
+    setMessages((prev) => {
+      const newMessages = [...prev]
+      // Remove error message
+      if (newMessages.length > 0 && newMessages[newMessages.length - 1].isError) {
+        newMessages.pop()
+      }
+      // Remove user message
+      if (newMessages.length > 0 && newMessages[newMessages.length - 1].role === 'user') {
+        newMessages.pop()
+      }
+      return newMessages
+    })
+
+    // Resend
+    sendMessage(lastUserMessageRef.current)
+  }, [sendMessage])
+
+  /**
    * Clear the conversation and start fresh
    */
   const clearConversation = useCallback(() => {
     setMessages([])
+    setFeedbackState({})
     setError(null)
     // Generate new conversation ID and update both state and storage
     const newId = generateId()
-    sessionStorage.setItem('conversationId', newId)
+    localStorage.setItem(STORAGE_KEYS.conversationId, newId)
+    localStorage.removeItem(STORAGE_KEYS.messages)
+    localStorage.removeItem(STORAGE_KEYS.feedbackState)
     setConversationId(newId)
+    lastUserMessageRef.current = null
   }, [])
 
   /**
    * Submit feedback about a message
-   * @param {string} userMessage - The user's message
+   * @param {string} messageId - The message ID
+   * @param {string} userMessage - The user's message that preceded this response
    * @param {string} assistantResponse - The AI's response
+   * @param {string} rating - 'positive' or 'negative'
    * @param {string} feedbackType - Type of feedback
    * @param {string} notes - Optional notes
    */
-  const submitFeedback = useCallback(async (userMessage, assistantResponse, feedbackType, notes = '') => {
+  const submitFeedback = useCallback(async (messageId, userMessage, assistantResponse, rating, feedbackType, notes = '') => {
+    // Update local feedback state
+    setFeedbackState((prev) => ({
+      ...prev,
+      [messageId]: rating,
+    }))
+
     try {
       await fetch(`${API_URL}/api/feedback`, {
         method: 'POST',
@@ -157,6 +267,7 @@ export function useChat() {
           user_message: userMessage,
           assistant_response: assistantResponse,
           feedback_type: feedbackType,
+          rating: rating,
           notes: notes,
         }),
       })
@@ -165,6 +276,18 @@ export function useChat() {
     }
   }, [conversationId])
 
+  /**
+   * Get the user message that preceded a given assistant message
+   */
+  const getUserMessageBefore = useCallback((messageIndex) => {
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        return messages[i].content
+      }
+    }
+    return ''
+  }, [messages])
+
   return {
     messages,
     isLoading,
@@ -172,6 +295,9 @@ export function useChat() {
     sendMessage,
     clearConversation,
     submitFeedback,
+    retryLastMessage,
+    feedbackState,
+    getUserMessageBefore,
   }
 }
 

@@ -45,7 +45,17 @@ function Header({ onNewChat, hasMessages }) {
  * Main App component
  */
 function App() {
-  const { messages, isLoading, error, sendMessage, clearConversation } = useChat()
+  const {
+    messages,
+    isLoading,
+    error,
+    sendMessage,
+    clearConversation,
+    submitFeedback,
+    retryLastMessage,
+    feedbackState,
+    getUserMessageBefore,
+  } = useChat()
 
   return (
     <div className="app">
@@ -57,6 +67,10 @@ function App() {
           isLoading={isLoading}
           error={error}
           onSendMessage={sendMessage}
+          onRetry={retryLastMessage}
+          onSubmitFeedback={submitFeedback}
+          feedbackState={feedbackState}
+          getUserMessageBefore={getUserMessageBefore}
         />
       </div>
     </div>

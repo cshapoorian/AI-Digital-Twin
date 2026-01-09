@@ -15,9 +15,10 @@ from sqlalchemy.orm import Session
 from api.models import (
     ChatRequest, ChatResponse,
     FeedbackRequest, FeedbackResponse,
+    AnalyticsRequest, AnalyticsResponse,
     HealthResponse
 )
-from db import get_db, Conversation, Message, Feedback
+from db import get_db, Conversation, Message, Feedback, Analytics
 from core import generate_response
 
 router = APIRouter()
@@ -125,19 +126,48 @@ async def submit_feedback(request: FeedbackRequest, db: Session = Depends(get_db
     - Questions the model couldn't answer
     - Inappropriate responses
     - Inaccurate information
+    - Thumbs up/down ratings with optional notes
     """
     feedback = Feedback(
         conversation_id=request.conversation_id,
         user_message=request.user_message,
         assistant_response=request.assistant_response,
         feedback_type=request.feedback_type,
+        rating=request.rating,
         notes=request.notes
     )
     db.add(feedback)
+
+    # Also log as analytics event
+    analytics = Analytics(
+        event_type="feedback",
+        session_id=request.conversation_id,
+        event_data=f'{{"type": "{request.feedback_type}", "rating": "{request.rating or "none"}"}}'
+    )
+    db.add(analytics)
+
     db.commit()
     db.refresh(feedback)
 
     return FeedbackResponse(success=True, feedback_id=feedback.id)
+
+
+@router.post("/analytics", response_model=AnalyticsResponse)
+async def track_event(request: AnalyticsRequest, db: Session = Depends(get_db)):
+    """
+    Track an analytics event (visit, message, etc.).
+    Privacy-friendly: no personal data stored.
+    """
+    import json
+    analytics = Analytics(
+        event_type=request.event_type,
+        session_id=request.session_id,
+        event_data=json.dumps(request.metadata) if request.metadata else None
+    )
+    db.add(analytics)
+    db.commit()
+
+    return AnalyticsResponse(success=True)
 
 
 @router.get("/health", response_model=HealthResponse)

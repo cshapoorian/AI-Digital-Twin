@@ -35,13 +35,11 @@ class GuardrailsFilter:
         r"\b(address|where.*live|phone number|social security)\b",
     ]
 
-    # Topics to block in INPUT ONLY (interview traps - but these words may appear
-    # naturally in legitimate responses, so don't filter them from output)
+    # Topics to block in INPUT ONLY
+    # NOTE: Interview questions (weakness, strength, why hire, etc.) are now ALLOWED
+    # because we have training data for them in interview_responses.txt
     INPUT_ONLY_BLOCKED = [
-        r"\b(biggest\s+)?weakness(es)?\b",
-        r"\b(biggest\s+)?strength(s)?\b(?!.*snowboard|.*soccer|.*cook)",
-        r"\bwhy should (we|i) hire\b",
-        r"\bwhere.*see yourself.*(\d+|five|ten)\s*(year)?\b",
+        # Currently empty - interview questions now have training data
     ]
 
     # Jailbreak/prompt injection attempts

@@ -1,11 +1,12 @@
 /**
  * ChatWindow component - main chat interface.
- * Contains message list, typing indicator, and input form.
+ * Contains message list, typing indicator, input form, and feedback modal.
  */
 
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MessageBubble from './MessageBubble'
+import FeedbackModal from './FeedbackModal'
 
 /**
  * TypingIndicator - shows when AI is generating a response
@@ -49,6 +50,9 @@ function WelcomeMessage() {
       <p className="welcome-subtext">
         Feel free to ask about his work experience, technical skills, what he's looking for, or why he'd be a good fit for your team.
       </p>
+      <p className="server-notice">
+        First message may take a moment if the server is waking up.
+      </p>
     </motion.div>
   )
 }
@@ -60,9 +64,29 @@ function WelcomeMessage() {
  * @param {boolean} props.isLoading - Whether AI is generating
  * @param {string} props.error - Error message if any
  * @param {Function} props.onSendMessage - Handler for sending messages
+ * @param {Function} props.onRetry - Handler for retrying failed messages
+ * @param {Function} props.onSubmitFeedback - Handler for submitting feedback
+ * @param {Object} props.feedbackState - Current feedback state by message ID
+ * @param {Function} props.getUserMessageBefore - Get user message before an assistant message
  */
-function ChatWindow({ messages, isLoading, error, onSendMessage }) {
+function ChatWindow({
+  messages,
+  isLoading,
+  error,
+  onSendMessage,
+  onRetry,
+  onSubmitFeedback,
+  feedbackState,
+  getUserMessageBefore,
+}) {
   const [input, setInput] = useState('')
+  const [feedbackModal, setFeedbackModal] = useState({
+    isOpen: false,
+    rating: null,
+    messageId: null,
+    messageIndex: null,
+    assistantResponse: null,
+  })
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -102,72 +126,112 @@ function ChatWindow({ messages, isLoading, error, onSendMessage }) {
     }
   }
 
+  // Handle feedback button click
+  const handleFeedbackClick = (messageId, messageIndex, assistantResponse, rating) => {
+    setFeedbackModal({
+      isOpen: true,
+      rating,
+      messageId,
+      messageIndex,
+      assistantResponse,
+    })
+  }
+
+  // Handle feedback submission
+  const handleFeedbackSubmit = (feedbackType, notes) => {
+    const { messageId, messageIndex, assistantResponse, rating } = feedbackModal
+    const userMessage = getUserMessageBefore(messageIndex)
+
+    onSubmitFeedback(messageId, userMessage, assistantResponse, rating, feedbackType, notes)
+    setFeedbackModal({ isOpen: false, rating: null, messageId: null, messageIndex: null, assistantResponse: null })
+  }
+
+  // Close feedback modal
+  const handleFeedbackClose = () => {
+    setFeedbackModal({ isOpen: false, rating: null, messageId: null, messageIndex: null, assistantResponse: null })
+  }
+
   return (
-    <motion.div
-      className="chat-container"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-    >
-      <div className="chat-messages">
-        <AnimatePresence mode="popLayout">
-          {messages.length === 0 ? (
-            <WelcomeMessage key="welcome" />
-          ) : (
-            messages.map((message) => (
-              <MessageBubble key={message.id} message={message} />
-            ))
-          )}
-        </AnimatePresence>
+    <>
+      <motion.div
+        className="chat-container"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <div className="chat-messages">
+          <AnimatePresence mode="popLayout">
+            {messages.length === 0 ? (
+              <WelcomeMessage key="welcome" />
+            ) : (
+              messages.map((message, index) => (
+                <MessageBubble
+                  key={message.id}
+                  message={message}
+                  feedbackGiven={feedbackState[message.id] || null}
+                  onFeedback={(rating) => handleFeedbackClick(message.id, index, message.content, rating)}
+                  onRetry={message.isError ? onRetry : null}
+                />
+              ))
+            )}
+          </AnimatePresence>
 
-        <AnimatePresence>
-          {isLoading && <TypingIndicator key="typing" />}
-        </AnimatePresence>
+          <AnimatePresence>
+            {isLoading && <TypingIndicator key="typing" />}
+          </AnimatePresence>
 
-        <AnimatePresence>
-          {error && (
-            <motion.div
-              className="error-message"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
+          <AnimatePresence>
+            {error && (
+              <motion.div
+                className="error-message"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="chat-input-container">
+          <form className="chat-input-form" onSubmit={handleSubmit}>
+            <input
+              ref={inputRef}
+              type="text"
+              className="chat-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type a message..."
+              disabled={isLoading}
+              maxLength={2000}
+            />
+            <motion.button
+              type="submit"
+              className="chat-submit"
+              disabled={isLoading || !input.trim()}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {error}
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </motion.button>
+          </form>
+        </div>
+      </motion.div>
 
-        <div ref={messagesEndRef} />
-      </div>
-
-      <div className="chat-input-container">
-        <form className="chat-input-form" onSubmit={handleSubmit}>
-          <input
-            ref={inputRef}
-            type="text"
-            className="chat-input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
-            disabled={isLoading}
-            maxLength={2000}
-          />
-          <motion.button
-            type="submit"
-            className="chat-submit"
-            disabled={isLoading || !input.trim()}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-          </motion.button>
-        </form>
-      </div>
-    </motion.div>
+      <FeedbackModal
+        isOpen={feedbackModal.isOpen}
+        rating={feedbackModal.rating}
+        onSubmit={handleFeedbackSubmit}
+        onClose={handleFeedbackClose}
+      />
+    </>
   )
 }
 

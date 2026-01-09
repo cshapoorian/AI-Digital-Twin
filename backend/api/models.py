@@ -41,8 +41,13 @@ class FeedbackRequest(BaseModel):
     assistant_response: Optional[str] = Field(None, max_length=5000)
     feedback_type: str = Field(
         ...,
-        pattern="^(unanswered|inappropriate|inaccurate|other)$",
+        pattern="^(unanswered|inappropriate|inaccurate|helpful|unhelpful|other)$",
         description="Type of feedback"
+    )
+    rating: Optional[str] = Field(
+        None,
+        pattern="^(positive|negative)$",
+        description="Thumbs up (positive) or down (negative)"
     )
     notes: Optional[str] = Field(None, max_length=1000, description="Additional context")
 
@@ -51,6 +56,18 @@ class FeedbackResponse(BaseModel):
     """Response body for feedback endpoint."""
     success: bool
     feedback_id: int
+
+
+class AnalyticsRequest(BaseModel):
+    """Request body for analytics tracking."""
+    event_type: str = Field(..., pattern="^(visit|message|feedback)$")
+    session_id: Optional[str] = Field(None, max_length=36)
+    metadata: Optional[dict] = Field(None, description="Extra event data")
+
+
+class AnalyticsResponse(BaseModel):
+    """Response body for analytics tracking."""
+    success: bool
 
 
 class HealthResponse(BaseModel):

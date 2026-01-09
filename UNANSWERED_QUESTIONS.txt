@@ -8,51 +8,51 @@ COMMON RECRUITER QUESTIONS
 ================================================================================
 
 1. What is your biggest weakness?
-   YOUR ANSWER:
+   YOUR ANSWER: My biggest weakness is I care so much about my job that I get upset when things don't go well
 
 
 2. What is your biggest strength?
-   YOUR ANSWER:
+   YOUR ANSWER: My ability to adapt and persevere despite any difficult circumstance thrown my way
 
 
 3. Why should we hire you?
-   YOUR ANSWER:
+   YOUR ANSWER: You should hire me because I have knowledge and skills that span a sizeable amount of cross unctional work. So no matter what you throw at me, I'll be able to do it
 
 
 4. Where do you see yourself in 5 years?
-   YOUR ANSWER:
+   YOUR ANSWER: I see myself properly settling down in the Bay Area, and continuing to work on my skills as a professional, a partner, a friend, and a son. Beyond that I have goals to become a CTO or CPO at some point but the timeline on that will be more clear as time goes on
 
 
 5. Why did you leave your last job? / Why are you looking for a new opportunity?
-   YOUR ANSWER:
+   YOUR ANSWER: I left my last long term position to move back home and help my father who is going through later life complications. My last role didn't pan out so I'm eager to hit the ground running at my next role!
 
 
 6. What was your GPA in college?
-   YOUR ANSWER:
+   YOUR ANSWER: DONT ANSWER
 
 
 7. Tell me about a time you failed and what you learned.
-   YOUR ANSWER:
+   YOUR ANSWER: I once released an update under duress without fully testing it. The result was an experience breaking bug that had us scrambling to find a fix in a short amount of time. What I learned from that experience is to not compromise testing and sometimes what you test is more important than how you test
 
 
 8. Tell me about a conflict with a coworker and how you resolved it.
-   YOUR ANSWER:
+   YOUR ANSWER: I had a coworker that had a bad attitude towards me. I find myself to be a very personable and likeable person, and it was really difficult to understand what was going on. After finding out I wasn't the only person who had this experience with them, I took the extra effort to improve relations with him by catching im in scenarios outside of work. That gave me the space to truly build a rapport with him and even remedy the way he treated some of my other coworkers.
 
 
 9. How do you handle stress or tight deadlines?
-   YOUR ANSWER:
+   YOUR ANSWER: I handle stress by recognizing what I personally have control over, and doing what I can to make sure my corner of the sandbox is fully prepared for whatever comes. Whether that is putting in extra hours, reaching out to other stakeholders to coordinate, or really anything else I have direct impact over.
 
 
 10. What motivates you?
-    YOUR ANSWER:
+    YOUR ANSWER: My life purpose of being a life-long learner. I have seen so many things, interacted with so many people, and found that a lot of people lose faith easily by the vastness of what life holds. I find it as an opportunity to see what I can really do and see in my life. All the skills I develop in my profession can put me in the right rooms for a life changing experience, and that prospect always excites me. So I have to persevere and push through whatever difficulties are thrown my way.
 
 
 11. Describe your ideal work environment.
-    YOUR ANSWER:
+    YOUR ANSWER: My ideal work environment includes people I would willingly hang out with outside of work. It doesn't mean I will hang out with them outside of work, but if I get it my way, I'd really prefer that especially if I am spending so much time with those people.
 
 
 12. What questions do you have for us? (typical questions you ask interviewers)
-    YOUR ANSWER:
+    YOUR ANSWER: DONT ANSWER AND TELL THEM TO REACH OUT TO ME
 
 
 ================================================================================
@@ -60,27 +60,27 @@ TECHNICAL QUESTIONS
 ================================================================================
 
 13. Walk me through a challenging technical problem you solved.
-    YOUR ANSWER:
+    YOUR ANSWER: I was able to identify a bluetooth memory leak. The way I went about with was in depth research of the failure modes, the memory map of the hardware product, and linking the two together. This was a problem that had all of the other engineers stumped but I didn't want to give up as it really mattered to our clients. My perseverance paid off in this case and inevitably led to my promotion.
 
 
 14. Tell me about your experience at Wavelynx in more detail.
-    YOUR ANSWER:
+    YOUR ANSWER: It was my first full time position out of college and I learned a lot not only about engineering and industry standards, but also how businesses are ran and different GTM strategies and marketing ploys. It was a small company when I joined and became an established mid-sized company by the time I left. I got to contribute a lot to the culture of the company and was widely regarded as a pillar of knowledge andpp
 
 
 15. Tell me about your experience at Bland AI in more detail.
-    YOUR ANSWER:
+    YOUR ANSWER: I hit the ground running by doing all the onboarding material before I started. This allowed me to take on clients from day 1. I was working with an undisclosable public company when our funding was cut unexpectedly, and they had to make some panick layoffs. Which included me, the guy I was hired with, and other across different departments.
 
 
 16. What was your favorite project and why?
-    YOUR ANSWER:
+    YOUR ANSWER: My favorite project was the Apex Reader (from Wavelynx). I got to own a lot of the QA and testing processes, along with filling gaps in project planning with JIRA and deciding certain necessary features. I called upon my experience to define product requirements well and utilized my ability to communicate with devs and others for seamless development.
 
 
 17. How do you stay current with technology trends?
-    YOUR ANSWER:
+    YOUR ANSWER: I work on certifications in recent technology advances. For instance I completed 3 certiications recently in machine learning to bolster my knowledge of how AI works at a foundational level. I have also begun a certification on Agentic Systems and System Design to bolster my understanding of how to string agents together for a desired outcome.
 
 
 18. What's your experience with Agile/Scrum methodologies?
-    YOUR ANSWER:
+    YOUR ANSWER: I have done a lot of project planning in my experience. Whether it was for my time at UNICEF as a project manager intern, or working on new products at Wavelynx - working with Agile methodologies was pivotal to project planning for those products. 
 
 
 ================================================================================
@@ -88,19 +88,19 @@ PERSONAL/BEHAVIORAL
 ================================================================================
 
 19. Tell me about yourself (your preferred "elevator pitch").
-    YOUR ANSWER:
+    YOUR ANSWER: I am a professional with technical skills of a software engineer and the communication skills of a sales and marketing representative. I excel in small team environments where people are asked to wear multiple hats, and I have high ownership, operate well in ambiguity, and excel in challenge.                                                                                                                                   
 
 
 20. What are you passionate about outside of work?
-    YOUR ANSWER:
+    YOUR ANSWER: I like to spend time with my friends, stay active by playing soccer and snowboarding, and sometimes unwind with TV or video games.
 
 
 21. How would your previous coworkers describe you?
-    YOUR ANSWER:
+    YOUR ANSWER: A positive influence to work culture and environment. Clever, hard working, and caring for those he leads.
 
 
 22. What's a professional accomplishment you're most proud of?
-    YOUR ANSWER:
+    YOUR ANSWER: I proud of my promotion. In an industry dominated by Gen X and Boomers, I proved my ability to understand complex technical problems, demonstrate leadership, proper communication, and be adjustable to the business needs on a dime.
 
 
 ================================================================================
@@ -108,15 +108,15 @@ ROLE-SPECIFIC (FDE/Solutions Engineer)
 ================================================================================
 
 23. Why are you interested in a customer-facing technical role?
-    YOUR ANSWER:
+    YOUR ANSWER: I am interested in a customer facing role because I find it to be the best fit of my skills and my passions. I am a strong technical software engineer, but my passion lies in building connections with people. In my role as Lead QA Test Engineer, I found that I didn't get to deliver all of my value being stuck in the back of the house, so I am now looking for a role that formalizes my involvement in the front of the house.
 
 
 24. Describe a time you explained a complex technical concept to a non-technical person.
-    YOUR ANSWER:
+    YOUR ANSWER: During my time at Wavelynx, I had to regularly communicate to marketing teams, sales teams, and non-technical upper management. It was mainly contextualizing complex ideas in a usable way depending on my audience.
 
 
 25. How do you balance customer needs with engineering constraints?
-    YOUR ANSWER:
+    YOUR ANSWER: I am customer obsessed, however I understand the importance of engineering needs and how often people misunderstand the engineering process. I do my best to give engineers room to breathe with any tickets I send them, all the while remaining an advocate for the customer.
 
 
 ================================================================================
