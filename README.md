@@ -19,7 +19,6 @@ AI-Digital-Twin/
 │   ├── db/                # SQLite database
 │   └── requirements.txt
 ├── ARCHITECTURE.md        # Technical documentation
-├── CLAUDE.md              # AI assistant instructions
 └── README.md              # This file
 ```
 
