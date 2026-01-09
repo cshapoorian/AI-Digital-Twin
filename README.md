@@ -2,6 +2,8 @@
 
 A conversational web application that serves as an AI representation of its owner. Users can chat with the digital twin to learn about the owner's interests, background, and perspectives.
 
+[See the website](https://cameron-digital-twin.netlify.app/)
+
 ## Project Structure
 
 ```
