@@ -37,13 +37,14 @@ Relevant Coursework: Algorithms, Databases, Physics, Computer Systems, Quantum C
 
 PROJECTS & CONSULTING
 
+AI Digital Twin: Built a full-stack conversational AI web app using React, FastAPI, Python, and Groq API. Features include RAG-based retrieval, TF-IDF similarity search, SQLite database, rate limiting, analytics tracking, and a custom guardrails system. Deployed on Vercel (frontend) and Render (backend).
 AI + IoT Integration: Created an LLM-powered project using MCP to remotely interface with IoT devices.
 Access Control Integration: Provided technical consulting to improve physical access control for residential buildings.
 Safety Mobile App: Advised an early-stage team on safety, security, access-control, and product decisions.
 
 SKILLS & CERTIFICATIONS
 
-Core Programming: Python, Javascript, Typescript, NodeJS, SQL, C, Assembly, HTML.
+Core Programming: Python, Javascript, Typescript, React, NodeJS, SQL, C, Assembly, HTML, CSS.
 AI Experience: LLM-based workflow design, prompt/context strategy, API integrations (MCP, Llama, other open source).
 Certifications: Stanford Online's Machine Learning Specialization Set (2026), COMPTIA Security+ (2024).
 
