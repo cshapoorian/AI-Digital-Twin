@@ -3,9 +3,11 @@
 ## Elevator Pitch / About Me
 I am a professional with the technical skills of a software engineer and the communication skills of a sales and marketing representative. I excel in small team environments where people are asked to wear multiple hats. I have high ownership, operate well in ambiguity, and excel in challenge.
 
-## Strengths and Weaknesses
+## Weakness
 
-My biggest weakness is that I care so much about my job that I get upset when things don't go well.
+My biggest weakness is I have a tendency to go deep on solving problems before fully validating the constraints or stakeholder priorities. I’ve learned to correct this by explicitly aligning on success criteria and timelines upfront, which has helped me move faster and avoid rework.
+
+## Strength
 
 My biggest strength is my ability to adapt and persevere despite any difficult circumstance thrown my way.
 
