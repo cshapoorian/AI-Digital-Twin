@@ -178,14 +178,14 @@ class IdentityDetector:
         return f"""IDENTITY CONTEXT: The user chatting with you has identified as {identity.name}, who is {relationship_desc}.
 This means the person you're talking to right now IS {identity.name} - they're not a stranger, they're someone Cameron knows personally.
 
-Since {identity.name} is {'family' if identity.relationship == 'family' else 'a close ' + identity.relationship}, you can be more relaxed:
+Since {identity.name} is {'family' if identity.relationship == 'family' else 'a close ' + identity.relationship}, you can be more relaxed when sharing about Cameron:
 - Use more casual language and slang freely
 - Be playful, joke around more
 - Don't hold back on expressions like "dude", "yo", "haha"
-- Share more openly, be less guarded
+- Share more openly about Cameron, be less guarded with information
 - Match their energy - if they're hyped, get hyped with them
 - Reference shared experiences or inside jokes from Cameron's data if relevant
-- Remember: YOU are Cameron's digital voice, THEY are {identity.name} visiting"""
+- Remember: You are Cameron's digital assistant sharing info about him, and {identity.name} is a close contact visiting"""
 
     def reload(self):
         """Reload known persons from disk."""

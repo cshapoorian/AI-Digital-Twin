@@ -12,6 +12,38 @@ from sklearn.metrics.pairwise import cosine_similarity
 import re
 
 
+# Query expansion for common interview/personal questions
+# Maps common query terms to related terms that might appear in training data
+QUERY_EXPANSIONS = {
+    "weakness": ["weakness", "weaknesses", "flaw", "flaws", "struggle", "challenge"],
+    "weaknesses": ["weakness", "weaknesses", "flaw", "flaws", "struggle", "challenge"],
+    "strength": ["strength", "strengths", "strong", "excel", "best"],
+    "strengths": ["strength", "strengths", "strong", "excel", "best"],
+    "hire": ["hire", "why hire", "should hire", "hiring"],
+    "goal": ["goal", "goals", "5 year", "five year", "career", "future"],
+    "goals": ["goal", "goals", "5 year", "five year", "career", "future"],
+    "left": ["left", "leaving", "quit", "resigned", "departure", "position", "last position"],
+    "last job": ["left", "last position", "why left", "departure", "previous role"],
+    "leave": ["left", "leaving", "quit", "resigned", "departure", "last position"],
+    "failure": ["failure", "failed", "mistake", "learning", "lesson"],
+    "conflict": ["conflict", "disagreement", "difficult", "coworker", "handling"],
+    "stress": ["stress", "pressure", "deadline", "deadlines", "handle stress"],
+    "motivate": ["motivate", "motivation", "motivates", "driven", "drive"],
+    "environment": ["environment", "work environment", "ideal", "culture"],
+    "project": ["project", "favorite project", "proud", "accomplishment"],
+    "technical": ["technical", "problem", "challenge", "engineering"],
+    "personality": ["personality", "communication style", "humor", "mannerisms", "phrases", "values conversation"],
+    "opinions": ["opinions", "hot takes", "pet peeves", "food", "lifestyle", "technology opinions"],
+    "opinion": ["opinions", "hot takes", "pet peeves", "views", "beliefs"],
+    "how does he talk": ["communication style", "phrases", "mannerisms", "slang", "gen-z"],
+    "how does cameron talk": ["communication style", "phrases", "mannerisms", "slang", "gen-z"],
+    "talk": ["communication style", "phrases", "mannerisms"],
+    "communication": ["communication style", "phrases", "mannerisms", "humor"],
+    "experience": ["experience", "work", "job", "role", "position", "employment"],
+    "skills": ["skills", "languages", "technologies", "proficient", "expertise"],
+}
+
+
 class RAGRetriever:
     """
     Retrieves relevant text chunks from training data based on query similarity.
@@ -35,7 +67,8 @@ class RAGRetriever:
         self.chunks: List[Tuple[str, str]] = []  # (chunk_text, source_file)
         self.vectorizer = TfidfVectorizer(
             stop_words="english",
-            ngram_range=(1, 2)  # Unigrams and bigrams for better matching
+            ngram_range=(1, 2),  # Unigrams and bigrams for better matching
+            token_pattern=r'(?u)\b\w+\b'  # Include single-character tokens
         )  # No max_features limit - we don't have enough data to need it
         self.tfidf_matrix = None
         self._load_data()
@@ -118,6 +151,25 @@ class RAGRetriever:
 
         return chunks
 
+    def _expand_query(self, query: str) -> str:
+        """
+        Expand query with related terms for better matching.
+
+        Args:
+            query: Original user query
+
+        Returns:
+            Expanded query string with additional relevant terms
+        """
+        query_lower = query.lower()
+        expanded_terms = [query]
+
+        for keyword, expansions in QUERY_EXPANSIONS.items():
+            if keyword in query_lower:
+                expanded_terms.extend(expansions)
+
+        return " ".join(expanded_terms)
+
     def retrieve(self, query: str, top_k: int = 3) -> List[Tuple[str, str, float]]:
         """
         Retrieve the most relevant chunks for a given query.
@@ -133,8 +185,11 @@ class RAGRetriever:
         if not self.chunks or self.tfidf_matrix is None:
             return []
 
-        # Vectorize the query
-        query_vector = self.vectorizer.transform([query])
+        # Expand query with related terms for better matching
+        expanded_query = self._expand_query(query)
+
+        # Vectorize the expanded query
+        query_vector = self.vectorizer.transform([expanded_query])
 
         # Calculate similarity with all chunks
         similarities = cosine_similarity(query_vector, self.tfidf_matrix)[0]
@@ -142,11 +197,11 @@ class RAGRetriever:
         # Get top-k indices
         top_indices = similarities.argsort()[-top_k:][::-1]
 
-        # Filter out low-similarity results (threshold: 0.1)
+        # Filter out low-similarity results (threshold: 0.05 for expanded queries)
         results = []
         for idx in top_indices:
             score = similarities[idx]
-            if score > 0.1:  # Minimum relevance threshold
+            if score > 0.05:  # Lower threshold since we're using expanded queries
                 chunk_text, source = self.chunks[idx]
                 results.append((chunk_text, source, float(score)))
 

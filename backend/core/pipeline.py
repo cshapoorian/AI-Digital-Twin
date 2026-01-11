@@ -107,8 +107,12 @@ class ADTPipeline:
             metadata["deflection_reason"] = "output_filtered"
 
         # Step 5: Check for uncertainty (for feedback logging)
+        # If uncertain and topic is not controversial, append contact info
         if self.guardrails.detect_uncertainty(final_response):
             metadata["uncertainty_detected"] = True
+            final_response = self.guardrails.get_uncertainty_response(
+                final_response, user_message
+            )
 
         return final_response, metadata
 

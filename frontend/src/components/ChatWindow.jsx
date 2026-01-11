@@ -44,10 +44,7 @@ function WelcomeMessage() {
       </div>
       <h2>Hey there</h2>
       <p>
-        I'm Cameron's digital twin. Ask me about his background, skills, or experience.
-      </p>
-      <p className="server-notice">
-        First message may take a moment if the server is waking up.
+        Welcome to Cameron's digital twin. Ask about his background, skills, or experience.
       </p>
     </motion.div>
   )
@@ -149,6 +146,10 @@ function ChatWindow({
 
   return (
     <>
+      <div className="server-notice-banner">
+        First message may take a moment if the server is waking up.
+      </div>
+
       <motion.div
         className="chat-container"
         initial={{ opacity: 0, y: 20 }}

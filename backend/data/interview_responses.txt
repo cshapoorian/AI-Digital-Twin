@@ -1,72 +1,166 @@
-# Interview Responses and Personal Insights
+# Professional Background and Interview Responses
+
+## Contact Information
+
+Cameron Shapoorian
+(415) 810-4263 | cshapoorian@gmail.com | linkedin.com/in/cameron-shapoorian/
 
 ## Elevator Pitch / About Me
+
 I am a professional with the technical skills of a software engineer and the communication skills of a sales and marketing representative. I excel in small team environments where people are asked to wear multiple hats. I have high ownership, operate well in ambiguity, and excel in challenge.
+
+## Education
+
+School of Engineering and Applied Sciences, University of Colorado
+Computer Science, Bachelor of Science
+Relevant Coursework: Algorithms, Databases, Physics, Computer Systems, Quantum Computing, Differential Equations.
+
+## Skills and Certifications
+
+Core Programming: Python (PyTorch, React, TensorFlow), Javascript (NodeJS), Typescript, SQL, C, Assembly.
+AI Experience: LLM-based workflow design, prompt/context strategy, API integrations (MCP, Llama, other open source).
+Certifications: Stanford Online's Machine Learning Specialization Set (2026), COMPTIA Security+ (2024).
+
+## Staying Current with Technology
+
+I work on certifications in recent technology advances. For instance I completed 3 certifications recently in machine learning to bolster my knowledge of how AI works at a foundational level. I have also begun a certification on Agentic Systems and System Design to bolster my understanding of how to string agents together for a desired outcome.
+
+---
+
+# Work Experience
+
+## Forward Deployed Engineer at Bland AI
+
+Oct - Nov 2025, San Francisco, CA
+Delivered client-facing AI workflow integrations and technical improvements across two client deployments.
+Built full end-to-end, API-driven workflows using JavaScript and our AI platform to automate customer operations.
+Scoped ambiguous customer problems into structured engineering tasks to accelerate delivery.
+Improved onboarding by codifying repeatable processes into concise documentation.
+
+### Bland AI Experience Details
+
+I hit the ground running by doing all the onboarding material before I started. This allowed me to take on clients from day 1. I was working with an undisclosable public company when our funding was cut unexpectedly, and they had to make some panic layoffs which included me, the guy I was hired with, and others across different departments.
+
+## Lead Test Automation Engineer at Wavelynx
+
+Jun 2022 - Oct 2025, Denver, CO
+Delivered 3 successful hardware products and subsequent updates, owning cross-functional technical execution.
+Reduced 6 month manual hardware/firmware testing cycle to a 2 week automated cycle.
+Led a team of 5 engineers and 5 technicians through product launches and project development.
+Created and maintained a production-grade automated testing platform using Python, C, and RS-485.
+Defined product requirements, launch timelines, executive summaries for C-Suite, praised for clarity.
+Collaborated directly with enterprise clients on technical integrations, shaping product expectations and delivery.
+Onboarded 22 employees with product training and technical knowledge.
+Served as a key product knowledge resource for C-Suite and cross-functional teams, improving alignment across the org.
+Influencing product and testing strategy by presenting technical insights and improvements to executive leadership.
+
+### Wavelynx Experience Details
+
+It was my first full-time position out of college and I learned a lot not only about engineering and industry standards, but also how businesses are run and different GTM strategies and marketing approaches. It was a small company when I joined and became an established mid-sized company by the time I left. I got to contribute a lot to the culture of the company and was widely regarded as a pillar of knowledge.
+
+### Challenging Technical Problem
+
+I was able to identify a bluetooth memory leak. The way I went about it was in-depth research of the failure modes, the memory map of the hardware product, and linking the two together. This was a problem that had all of the other engineers stumped but I didn't want to give up as it really mattered to our clients. My perseverance paid off in this case and inevitably led to my promotion.
+
+### Favorite Project
+
+My favorite project was the Apex Reader at Wavelynx. I got to own a lot of the QA and testing processes, along with filling gaps in project planning with JIRA and deciding certain necessary features. I called upon my experience to define product requirements well and utilized my ability to communicate with devs and others for seamless development.
+
+## Project Manager Intern at UNICEF USA
+
+Jun 2020 - Aug 2020, New York City, New York
+Collaborated with Digital Tech, IT, and Security teams to lay the groundwork for a major website refresh.
+Utilized Agile methodology with Jira and Atlassian tools to track progress and manage sprints.
+Coordinated with senior leadership for meeting scheduling and project approvals.
+Supported a website refresh initiative which improved user engagement and philanthropic support.
+
+### Agile/Scrum Experience
+
+I have done a lot of project planning in my experience. Whether it was for my time at UNICEF as a project manager intern, or working on new products at Wavelynx - working with Agile methodologies was pivotal to project planning for those products.
+
+---
+
+# Projects and Consulting
+
+AI Digital Twin: Created a chat bot using React, FastAPI, SQLite, RAG, Open Source Models, and Guardrails
+AI + IoT Integration: Created an LLM-powered project using MCP to remotely interface with IoT devices.
+Safety Mobile App: Advised an early-stage team on software and machine learning implementation.
+
+---
+
+# Community and Leadership
+
+Eagle Scout - Troop 243, Lafayette, CA
+Eagle Project, Multi-year Camp Counselor and Area Director, NYLT Graduate and Counselor, Community Service
+
+---
+
+# Interview Questions
 
 ## Weakness
 
-My biggest weakness is I have a tendency to go deep on solving problems before fully validating the constraints or stakeholder priorities. I’ve learned to correct this by explicitly aligning on success criteria and timelines upfront, which has helped me move faster and avoid rework.
+My biggest weakness is I have a tendency to go deep on solving problems before fully validating the constraints or stakeholder priorities. I've learned to correct this by explicitly aligning on success criteria and timelines upfront, which has helped me move faster and avoid rework.
 
 ## Strength
 
 My biggest strength is my ability to adapt and persevere despite any difficult circumstance thrown my way.
 
 ## Why Hire Me
+
 You should hire me because I have knowledge and skills that span a sizeable amount of cross-functional work. No matter what you throw at me, I'll be able to do it.
 
 ## Career Goals / 5 Year Plan
+
 I see myself properly settling down in the Bay Area and continuing to work on my skills as a professional, a partner, a friend, and a son. Beyond that I have goals to become a CTO or CPO at some point but the timeline on that will be more clear as time goes on.
 
 ## Why I Left My Last Position
+
 I left my last long-term position to move back home and help my father who is going through later life complications. My last role didn't pan out so I'm eager to hit the ground running at my next role.
 
 ## Learning From Failure
+
 I once released an update under duress without fully testing it. The result was an experience-breaking bug that had us scrambling to find a fix in a short amount of time. What I learned from that experience is to not compromise testing, and sometimes what you test is more important than how you test.
 
 ## Handling Conflict
+
 I had a coworker that had a bad attitude towards me. I find myself to be a very personable and likeable person, and it was really difficult to understand what was going on. After finding out I wasn't the only person who had this experience with them, I took the extra effort to improve relations with him by catching him in scenarios outside of work. That gave me the space to truly build a rapport with him and even remedy the way he treated some of my other coworkers.
 
 ## Handling Stress and Deadlines
+
 I handle stress by recognizing what I personally have control over, and doing what I can to make sure my corner of the sandbox is fully prepared for whatever comes. Whether that is putting in extra hours, reaching out to other stakeholders to coordinate, or really anything else I have direct impact over.
 
 ## What Motivates Me
+
 My life purpose of being a life-long learner. I have seen so many things, interacted with so many people, and found that a lot of people lose faith easily by the vastness of what life holds. I find it as an opportunity to see what I can really do and see in my life. All the skills I develop in my profession can put me in the right rooms for a life-changing experience, and that prospect always excites me. So I have to persevere and push through whatever difficulties are thrown my way.
 
 ## Ideal Work Environment
+
 My ideal work environment includes people I would willingly hang out with outside of work. It doesn't mean I will hang out with them outside of work, but if I get it my way, I'd really prefer that especially if I am spending so much time with those people.
 
-## Challenging Technical Problem
-I was able to identify a bluetooth memory leak. The way I went about it was in-depth research of the failure modes, the memory map of the hardware product, and linking the two together. This was a problem that had all of the other engineers stumped but I didn't want to give up as it really mattered to our clients. My perseverance paid off in this case and inevitably led to my promotion.
-
-## Wavelynx Experience Details
-It was my first full-time position out of college and I learned a lot not only about engineering and industry standards, but also how businesses are run and different GTM strategies and marketing approaches. It was a small company when I joined and became an established mid-sized company by the time I left. I got to contribute a lot to the culture of the company and was widely regarded as a pillar of knowledge.
-
-## Bland AI Experience Details
-I hit the ground running by doing all the onboarding material before I started. This allowed me to take on clients from day 1. I was working with an undisclosable public company when our funding was cut unexpectedly, and they had to make some panic layoffs which included me, the guy I was hired with, and others across different departments.
-
-## Favorite Project
-My favorite project was the Apex Reader at Wavelynx. I got to own a lot of the QA and testing processes, along with filling gaps in project planning with JIRA and deciding certain necessary features. I called upon my experience to define product requirements well and utilized my ability to communicate with devs and others for seamless development.
-
-## Staying Current with Technology
-I work on certifications in recent technology advances. For instance I completed 3 certifications recently in machine learning to bolster my knowledge of how AI works at a foundational level. I have also begun a certification on Agentic Systems and System Design to bolster my understanding of how to string agents together for a desired outcome.
-
-## Agile/Scrum Experience
-I have done a lot of project planning in my experience. Whether it was for my time at UNICEF as a project manager intern, or working on new products at Wavelynx - working with Agile methodologies was pivotal to project planning for those products.
-
-## Outside Interests
-I like to spend time with my friends, stay active by playing soccer and snowboarding, and sometimes unwind with TV or video games.
-
 ## How Coworkers Describe Me
+
 A positive influence to work culture and environment. Clever, hard working, and caring for those he leads.
 
 ## Professional Accomplishment I'm Most Proud Of
+
 I'm proud of my promotion. In an industry dominated by Gen X and Boomers, I proved my ability to understand complex technical problems, demonstrate leadership, proper communication, and be adjustable to the business needs on a dime.
 
+## Outside Interests
+
+I like to spend time with my friends, stay active by playing soccer and snowboarding, and sometimes unwind with TV or video games.
+
+---
+
+# Customer-Facing and Technical Communication
+
 ## Interest in Customer-Facing Technical Roles
+
 I am interested in a customer-facing role because I find it to be the best fit of my skills and my passions. I am a strong technical software engineer, but my passion lies in building connections with people. In my role as Lead QA Test Engineer, I found that I didn't get to deliver all of my value being stuck in the back of the house, so I am now looking for a role that formalizes my involvement in the front of the house.
 
 ## Explaining Technical Concepts to Non-Technical People
+
 During my time at Wavelynx, I had to regularly communicate to marketing teams, sales teams, and non-technical upper management. It was mainly contextualizing complex ideas in a usable way depending on my audience.
 
 ## Balancing Customer Needs with Engineering Constraints
+
 I am customer obsessed, however I understand the importance of engineering needs and how often people misunderstand the engineering process. I do my best to give engineers room to breathe with any tickets I send them, all the while remaining an advocate for the customer.
