@@ -120,7 +120,7 @@ class LLMClient:
 
         Args:
             api_key: Groq API key. Defaults to GROQ_API_KEY env var.
-            model: Model to use. Defaults to LLM_MODEL env var or llama-3.3-70b-versatile.
+            model: Model to use. Defaults to LLM_MODEL env var or openai/gpt-oss-120b.
         """
         self.api_key = api_key or os.getenv("GROQ_API_KEY")
         if not self.api_key:
@@ -128,7 +128,7 @@ class LLMClient:
                 "GROQ_API_KEY not found. Get a free key at https://console.groq.com"
             )
 
-        self.model = model or os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
+        self.model = model or os.getenv("LLM_MODEL", "openai/gpt-oss-120b")
         self.client = Groq(api_key=self.api_key)
 
         # Load config on init
@@ -195,7 +195,8 @@ class LLMClient:
                 model=self.model,
                 messages=messages,
                 max_tokens=max_tokens,
-                temperature=temperature
+                temperature=temperature,
+                **self._reasoning_kwargs()
             )
             response_text = response.choices[0].message.content
 
@@ -297,6 +298,20 @@ class LLMClient:
         self.config = load_config()
         self.system_prompt = load_system_prompt()
 
+    def _reasoning_kwargs(self) -> Dict[str, str]:
+        """
+        Extra kwargs for reasoning models (openai/gpt-oss-*).
+
+        Groq's gpt-oss models spend part of max_tokens on internal reasoning
+        before emitting a final answer; at the default effort this
+        occasionally exhausts the budget and returns an empty response.
+        "low" keeps reasoning short, matching the persona's terse style and
+        leaving headroom for the actual answer.
+        """
+        if self.model.startswith("openai/gpt-oss"):
+            return {"reasoning_effort": "low"}
+        return {}
+
     def health_check(self) -> bool:
         """
         Verify the API connection is working.
@@ -308,7 +323,8 @@ class LLMClient:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": "Hi"}],
-                max_tokens=5
+                max_tokens=20,
+                **self._reasoning_kwargs()
             )
             return True
         except Exception as e:

@@ -62,7 +62,7 @@
                                       v
 +-----------------------------------------------------------------------------+
 |                        Groq Cloud (Free Tier)                                |
-|                    Open-source LLM (llama-3.3-70b-versatile)                |
+|                    Open-source LLM (openai/gpt-oss-120b)                    |
 +-----------------------------------------------------------------------------+
 ```
 
@@ -190,7 +190,7 @@ The pipeline orchestrates response generation through multiple stages:
 - Builds multi-part prompt: personality + style + guardrails + context + identity
 - Enforces third-person perspective (speaks ABOUT Cameron, not AS Cameron)
 - First message always asks who the user is
-- Uses Groq API with `llama-3.3-70b-versatile` model
+- Uses Groq API with `openai/gpt-oss-120b` model
 
 **Groq Free Tier Limits**:
 - 30 requests/minute (matched by rate limiter)
@@ -301,7 +301,7 @@ Controls model parameters:
   - `GROQ_API_KEY` (from https://console.groq.com)
   - `ALLOWED_ORIGINS` (frontend URL for CORS)
   - `CHAT_ENABLED` (kill switch, default: true)
-  - `LLM_MODEL` (optional, default: llama-3.3-70b-versatile)
+  - `LLM_MODEL` (optional, default: openai/gpt-oss-120b)
 
 ## Security Measures
 
