@@ -120,7 +120,7 @@ class LLMClient:
 
         Args:
             api_key: Groq API key. Defaults to GROQ_API_KEY env var.
-            model: Model to use. Defaults to LLM_MODEL env var or llama-3.1-8b-instant.
+            model: Model to use. Defaults to LLM_MODEL env var or llama-3.3-70b-versatile.
         """
         self.api_key = api_key or os.getenv("GROQ_API_KEY")
         if not self.api_key:
@@ -128,7 +128,7 @@ class LLMClient:
                 "GROQ_API_KEY not found. Get a free key at https://console.groq.com"
             )
 
-        self.model = model or os.getenv("LLM_MODEL", "llama-3.1-8b-instant")
+        self.model = model or os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
         self.client = Groq(api_key=self.api_key)
 
         # Load config on init
