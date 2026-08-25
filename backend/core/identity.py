@@ -15,7 +15,7 @@ from dataclasses import dataclass
 class IdentityMatch:
     """Represents a detected identity match."""
     name: str
-    relationship: str  # "family", "partner", "friend"
+    relationship: str  # "family", "friend"
     relationship_detail: str  # "sister", "brother", "Colorado friend", etc.
     is_known: bool = True
 
@@ -52,7 +52,6 @@ class IdentityDetector:
         try:
             content = file_path.read_text(encoding="utf-8")
             self._parse_family_members(content)
-            self._parse_partner(content)
             self._parse_friends(content)
         except Exception as e:
             print(f"Error loading known persons: {e}")
@@ -73,21 +72,6 @@ class IdentityDetector:
             if match:
                 name = match.group(1).strip()
                 self.known_persons[name.lower()] = (relationship, detail)
-
-    def _parse_partner(self, content: str):
-        """Extract partner name(s) from content."""
-        # Pattern: "girlfriend's name is Brianna or Bri"
-        match = re.search(
-            r"girlfriend'?s? name is (\w+)(?: or (\w+))?",
-            content,
-            re.IGNORECASE
-        )
-        if match:
-            name = match.group(1).strip()
-            self.known_persons[name.lower()] = ("partner", "girlfriend")
-            if match.group(2):
-                nickname = match.group(2).strip()
-                self.known_persons[nickname.lower()] = ("partner", "girlfriend")
 
     def _parse_friends(self, content: str):
         """Extract friend names from content."""
@@ -141,7 +125,7 @@ class IdentityDetector:
             r"(?:i'?m|i am|this is|it'?s|it is)\s+(\w+)",  # "I'm Kyle", "This is Parisa"
             r"my name(?:'?s| is)\s+(\w+)",  # "My name is Kaleb"
             r"(\w+)\s+here",  # "Kaleb here"
-            r"hey,?\s+it'?s\s+(\w+)",  # "Hey, it's Bri"
+            r"hey,?\s+it'?s\s+(\w+)",  # "Hey, it's Kaleb"
         ]
 
         for pattern in id_patterns:
@@ -171,21 +155,20 @@ class IdentityDetector:
         """
         relationship_desc = {
             "family": f"Cameron's {identity.relationship_detail}",
-            "partner": "Cameron's girlfriend",
             "friend": f"Cameron's {identity.relationship_detail}",
         }.get(identity.relationship, "someone Cameron knows")
 
         return f"""IDENTITY CONTEXT: The user chatting with you has identified as {identity.name}, who is {relationship_desc}.
 This means the person you're talking to right now IS {identity.name} - they're not a stranger, they're someone Cameron knows personally.
 
-Since {identity.name} is {'family' if identity.relationship == 'family' else 'a close ' + identity.relationship}, you can be more relaxed when sharing about Cameron:
+Since {identity.name} is {'family' if identity.relationship == 'family' else 'a close ' + identity.relationship}, you can be more relaxed when sharing about yourself:
 - Use more casual language and slang freely
 - Be playful, joke around more
 - Don't hold back on expressions like "dude", "yo", "haha"
-- Share more openly about Cameron, be less guarded with information
+- Share more openly about yourself, be less guarded with information
 - Match their energy - if they're hyped, get hyped with them
-- Reference shared experiences or inside jokes from Cameron's data if relevant
-- Remember: You are Cameron's digital assistant sharing info about him, and {identity.name} is a close contact visiting"""
+- Reference shared experiences or inside jokes from your data if relevant
+- Remember: you're still speaking in first person as Cameron's digital twin, and {identity.name} is a close contact visiting"""
 
     def reload(self):
         """Reload known persons from disk."""

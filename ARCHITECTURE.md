@@ -156,8 +156,8 @@ The pipeline orchestrates response generation through multiple stages:
 
 **Implementation** (`core/identity.py`):
 - Parses names from `family_and_friends.txt`
-- Scans conversation for self-identification patterns ("I'm Kyle", "This is Bri")
-- Returns `IdentityMatch` with relationship type (family/partner/friend)
+- Scans conversation for self-identification patterns ("I'm Kyle", "I'm Trevor")
+- Returns `IdentityMatch` with relationship type (family/friend)
 - Enables relaxed, casual tone for recognized individuals
 
 #### Stage 1: Input Guardrails
@@ -175,11 +175,16 @@ The pipeline orchestrates response generation through multiple stages:
 **Implementation** (`core/rag.py`):
 - Load all `.txt` files from `data/` directory
 - Split into chunks (section-based with ## headers, or paragraph-based)
-- Use TF-IDF vectorization with unigrams/bigrams
+- Embed chunks with a local semantic embedding model (`fastembed`, ONNX-based - no PyTorch,
+  ~90MB, `sentence-transformers/all-MiniLM-L6-v2`) for real synonym/paraphrase matching
+- Falls back to TF-IDF automatically if the embedding model can't load (e.g. no network on
+  first run) so retrieval never goes fully offline
 - Query expansion for common interview questions (weakness -> weaknesses, flaw, struggle)
-- Return top-K relevant chunks as context (default: 3)
+- Return top-K relevant chunks above a minimum similarity, both configurable via
+  `rag_top_k` / `rag_min_similarity` in `settings.txt`
 
-**Why TF-IDF over embeddings?**: Lightweight, fast, no external API costs. Sufficient for small personal datasets.
+**Why local embeddings over an API?**: Free, no per-request cost or latency, and small enough
+to fit comfortably in Render's free-tier memory limit (unlike full PyTorch-based models).
 
 #### Stage 3: LLM Generation
 **Purpose**: Generate response using retrieved context + personality prompt.
@@ -188,7 +193,7 @@ The pipeline orchestrates response generation through multiple stages:
 - Loads system prompt from `config/system_prompt.txt`
 - Loads parameters from `config/settings.txt`
 - Builds multi-part prompt: personality + style + guardrails + context + identity
-- Enforces third-person perspective (speaks ABOUT Cameron, not AS Cameron)
+- Speaks in first person as Cameron's voice ("I", not "he") - a digital twin, not a narrator
 - First message always asks who the user is
 - Uses Groq API with `openai/gpt-oss-120b` model
 
@@ -208,6 +213,12 @@ The pipeline orchestrates response generation through multiple stages:
 - Inappropriate language cleaning
 
 ### 4. Database (SQLite + SQLAlchemy)
+
+**Schema migrations**: No Alembic (overkill for this project's size). `db/database.py`'s
+`init_db()` diffs each model's declared columns against what's actually on disk and runs
+`ALTER TABLE ... ADD COLUMN` for anything missing, every startup (idempotent - a no-op once
+columns are current). Add a column to a model in `db/models.py` and it's picked up automatically
+on next restart, no manual migration step needed.
 
 **Tables** (`db/models.py`):
 
@@ -237,6 +248,7 @@ CREATE TABLE feedback (
     feedback_type VARCHAR(20) NOT NULL,  -- 'unanswered', 'helpful', 'unhelpful', etc.
     rating VARCHAR(10),                   -- 'positive' or 'negative'
     notes TEXT,
+    reviewed BOOLEAN NOT NULL DEFAULT 0,  -- has the owner seen/addressed this?
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -267,6 +279,9 @@ CREATE TABLE analytics (
 4. **Backend** -> Response to Frontend (with metadata: blocked, uncertainty, identity)
 5. **Frontend** displays message with typing animation
 6. **User can submit feedback** -> `POST /api/feedback` with thumbs up/down + notes
+7. **Owner reviews feedback** -> visits `/admin` (frontend), enters `ADMIN_KEY`, sees unresolved
+   questions the twin couldn't answer well, and can mark them reviewed once addressed in the
+   training data (`GET/POST /api/admin/feedback...`, gated by `ADMIN_KEY`)
 
 ## Configuration
 
@@ -283,6 +298,9 @@ Controls model parameters:
 - `max_tokens` - Response length (default: 500)
 - `history_limit` - Conversation context size (default: 20)
 - `rag_top_k` - How many data chunks to retrieve (default: 3)
+- `rag_min_similarity` - Minimum similarity score to include a RAG result (default: 0.1).
+  Calibrated for embedding cosine similarity, not TF-IDF - true positives on paraphrased
+  queries typically score ~0.2-0.4, so values above ~0.4 will filter out most real matches.
 - `additional_instructions` - Extra rules appended to system prompt
 
 ## Deployment
@@ -302,6 +320,7 @@ Controls model parameters:
   - `ALLOWED_ORIGINS` (frontend URL for CORS)
   - `CHAT_ENABLED` (kill switch, default: true)
   - `LLM_MODEL` (optional, default: openai/gpt-oss-120b)
+  - `ADMIN_KEY` (optional - enables the `/admin` feedback digest; unset = admin routes return 404)
 
 ## Security Measures
 

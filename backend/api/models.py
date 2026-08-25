@@ -75,3 +75,29 @@ class HealthResponse(BaseModel):
     status: str
     chat_enabled: bool
     timestamp: datetime
+
+
+class AdminFeedbackItem(BaseModel):
+    """A single feedback entry for the admin digest."""
+    id: int
+    conversation_id: Optional[str] = None
+    user_message: str
+    assistant_response: Optional[str] = None
+    feedback_type: str
+    rating: Optional[str] = None
+    notes: Optional[str] = None
+    reviewed: bool
+    created_at: datetime
+
+
+class AdminFeedbackListResponse(BaseModel):
+    """Response body for the admin feedback digest."""
+    total: int
+    unreviewed: int
+    items: List[AdminFeedbackItem]
+
+
+class AdminReviewResponse(BaseModel):
+    """Response body for marking a feedback entry reviewed."""
+    success: bool
+    feedback_id: int

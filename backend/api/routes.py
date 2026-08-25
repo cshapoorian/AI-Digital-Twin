@@ -8,15 +8,17 @@ Endpoints:
 """
 
 import os
+import secrets
 from datetime import datetime, timezone
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from api.models import (
     ChatRequest, ChatResponse,
     FeedbackRequest, FeedbackResponse,
     AnalyticsRequest, AnalyticsResponse,
-    HealthResponse
+    HealthResponse,
+    AdminFeedbackItem, AdminFeedbackListResponse, AdminReviewResponse
 )
 from db import get_db, Conversation, Message, Feedback, Analytics
 from core import generate_response
@@ -27,6 +29,21 @@ router = APIRouter()
 def is_chat_enabled() -> bool:
     """Check if chat is enabled via environment variable (kill switch)."""
     return os.getenv("CHAT_ENABLED", "true").lower() == "true"
+
+
+def verify_admin_key(key: str):
+    """
+    Verify the admin key for feedback digest access.
+
+    Requires ADMIN_KEY to be set in the environment - if it's not
+    configured, the admin endpoints are disabled entirely (404) rather
+    than accepting any key.
+    """
+    admin_key = os.getenv("ADMIN_KEY")
+    if not admin_key:
+        raise HTTPException(status_code=404, detail="Not found")
+    if not key or not secrets.compare_digest(key, admin_key):
+        raise HTTPException(status_code=403, detail="Invalid admin key")
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -183,3 +200,53 @@ async def health_check():
         chat_enabled=is_chat_enabled(),
         timestamp=datetime.now(timezone.utc)
     )
+
+
+@router.get("/admin/feedback", response_model=AdminFeedbackListResponse)
+async def get_feedback_digest(
+    key: str = Query(..., description="Admin key"),
+    unreviewed_only: bool = Query(True, description="Only show unreviewed entries"),
+    limit: int = Query(50, ge=1, le=200),
+    db: Session = Depends(get_db)
+):
+    """
+    Feedback digest for the site owner.
+
+    Surfaces questions the twin couldn't answer (or answered poorly) so
+    they can be turned into new training data. Requires ADMIN_KEY.
+    """
+    verify_admin_key(key)
+
+    query = db.query(Feedback)
+    if unreviewed_only:
+        query = query.filter(Feedback.reviewed == False)  # noqa: E712
+
+    total = db.query(Feedback).count()
+    unreviewed = db.query(Feedback).filter(Feedback.reviewed == False).count()  # noqa: E712
+
+    items = query.order_by(Feedback.created_at.desc()).limit(limit).all()
+
+    return AdminFeedbackListResponse(
+        total=total,
+        unreviewed=unreviewed,
+        items=[AdminFeedbackItem.model_validate(item, from_attributes=True) for item in items]
+    )
+
+
+@router.post("/admin/feedback/{feedback_id}/review", response_model=AdminReviewResponse)
+async def mark_feedback_reviewed(
+    feedback_id: int,
+    key: str = Query(..., description="Admin key"),
+    db: Session = Depends(get_db)
+):
+    """Mark a feedback entry as reviewed. Requires ADMIN_KEY."""
+    verify_admin_key(key)
+
+    feedback = db.query(Feedback).filter(Feedback.id == feedback_id).first()
+    if not feedback:
+        raise HTTPException(status_code=404, detail="Feedback entry not found")
+
+    feedback.reviewed = True
+    db.commit()
+
+    return AdminReviewResponse(success=True, feedback_id=feedback_id)

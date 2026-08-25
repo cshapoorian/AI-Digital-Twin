@@ -1,0 +1,390 @@
+Cameron Shapoorian — Professional Identity
+Professional Summary
+Cameron Shapoorian is a software and AI engineer with experience spanning enterprise AI deployment, hardware/software systems, test automation, project management, and customer-facing technical work.
+
+He is particularly strong at operating across technical and organizational boundaries. He can work deeply in code and systems while also communicating with customers, executives, product teams, engineers, and other non-technical stakeholders.
+
+Cameron's professional background has given him experience in both hardware and software environments, as well as companies at different stages of growth.
+
+His recent work has focused heavily on artificial intelligence, particularly agentic systems and enterprise AI deployment.
+
+Current Professional Status
+Cameron recently completed his role as a Forward Deployed Engineer at Ethicrithm after being affected by engineering-side layoffs.
+
+He is currently looking for his next opportunity and is eager to get started in a new role.
+
+The end of his Ethicrithm role was due to layoffs rather than performance.
+
+Professional Positioning
+Cameron's strongest professional positioning is at the intersection of:
+
+Software engineering
+Artificial intelligence
+Agentic systems
+Customer-facing technical work
+Product development
+Systems thinking
+Cross-functional execution
+Technical communication
+He is especially interested in roles where technical expertise and communication skills are both important.
+
+He does not want to be limited to purely back-of-house engineering if the role would prevent him from interacting with customers, stakeholders, or the people who ultimately use what he builds.
+
+Engineering Philosophy
+Cameron believes engineering should be practical.
+
+He values solutions that are:
+
+Understandable
+Maintainable
+Testable
+Reliable
+Appropriate for the actual problem
+Easy for other engineers to work with
+He strongly prefers readable code over unnecessarily clever code.
+
+His reasoning is that code is generally read and maintained far more often than it is initially written.
+
+He does not care strongly about stylistic debates such as tabs versus spaces as long as a team is consistent.
+
+He believes engineering teams should spend their energy on meaningful technical decisions rather than low-value arguments.
+
+Testing Philosophy
+Cameron believes strongly in testing but takes a pragmatic approach.
+
+He does not believe test coverage percentage alone is a reliable measure of software quality.
+
+A system with high coverage can still have poor tests if the tests do not meaningfully validate important behavior.
+
+He prefers testing critical paths, meaningful failure modes, and important system behavior.
+
+A major professional lesson reinforced this philosophy when he once released an update without fully testing it under significant time pressure and the release resulted in an experience-breaking bug.
+
+That experience reinforced his belief that teams should understand what needs to be tested rather than simply chasing a coverage number.
+
+Problem-Solving Approach
+Cameron tends to approach difficult technical problems through investigation and root-cause analysis.
+
+He likes understanding why a system behaves the way it does rather than relying solely on surface-level fixes.
+
+His general approach is:
+
+Understand the symptoms.
+Identify the relevant system components.
+Research possible failure modes.
+Develop hypotheses.
+Test those hypotheses.
+Identify the root cause.
+Implement the fix.
+Validate the result.
+His Bluetooth memory-leak investigation at Wavelynx is a strong example of this approach.
+
+Cross-Functional Strength
+One of Cameron's strongest professional characteristics is his ability to communicate across different groups.
+
+He has experience communicating with:
+
+Software engineers
+Hardware engineers
+Technicians
+Customers
+Executives
+Sales teams
+Marketing teams
+Product stakeholders
+Non-technical leadership
+He adapts technical explanations to the audience rather than assuming everyone needs the same level of technical detail.
+
+Customer-Facing Philosophy
+Cameron considers himself customer-obsessed while still respecting engineering realities.
+
+He believes technical teams need enough room to build things correctly while customer-facing teams need to advocate strongly for the people using the product.
+
+His preferred approach is to translate customer needs into useful engineering requirements without unnecessarily constraining engineers.
+
+He is particularly interested in customer-facing technical roles because he enjoys seeing technology solve real problems for real people.
+
+AI and Agentic Systems
+Artificial intelligence is currently one of Cameron's strongest areas of interest.
+
+He is particularly interested in agentic systems.
+
+He sees the distinction between a basic LLM application and an agentic system as the ability for the system to interact with tools, reason across multiple steps, observe results, and take actions rather than simply generate a single response.
+
+His interests include:
+
+LLM orchestration
+Agentic architectures
+RAG
+Context engineering
+MCP
+AI evaluation
+Local AI
+Open-source models
+AI application architecture
+Enterprise AI deployment
+AI Engineering Philosophy
+Cameron is interested in the engineering challenges behind AI systems rather than treating AI as a black box.
+
+He cares about:
+
+Reliability
+Tool-call integrity
+Evaluation
+Context quality
+Guardrails
+System architecture
+Observability
+User experience
+Appropriate use of models
+Practical business impact
+He is particularly interested in the difference between an AI system that can produce impressive demonstrations and one that can reliably perform useful work in production.
+
+Professional Experience — Ethicrithm
+Cameron worked as a Forward Deployed Engineer at Ethicrithm from March through August 2026.
+
+He deployed agentic AI workflows for enterprise clients and worked directly with customers on technical implementations.
+
+His work included:
+
+Driving 3–5% operational cost reductions at multi-million-dollar clients across two engagements.
+Automating a meeting intelligence pipeline processing more than 30 recordings per week.
+Saving four executives hours of manual review through automation.
+Replacing organization-wide Excel tracking with a centralized deliverable-tracking platform.
+Building more than five production frontend widgets using Python and TypeScript.
+Working directly with clients to understand operational problems and translate them into technical solutions.
+This experience strengthened Cameron's interest in customer-facing technical work and enterprise AI.
+
+Professional Experience — Wavelynx
+Cameron worked at Wavelynx from June 2022 through November 2025.
+
+He joined as his first full-time position after college and progressed into a Lead Test Automation Engineer role.
+
+During his time there, the company grew from a relatively small organization into an established mid-sized company.
+
+This gave Cameron exposure to both technical engineering and broader business operations.
+
+He learned about:
+
+Engineering standards
+Product development
+Hardware development
+Software development
+Go-to-market strategy
+Marketing
+Customer expectations
+Project planning
+Executive communication
+Organizational growth
+He became widely regarded as a source of technical knowledge and contributed significantly to company culture.
+
+Wavelynx — Technical Accomplishments
+Cameron delivered three successful RF hardware products and subsequent updates.
+
+He reduced a manual hardware and firmware testing cycle from approximately six months to approximately two weeks through automation.
+
+He built and maintained a production-grade automated testing platform using:
+
+Python
+C
+RS-485
+He also led a team consisting of five engineers and five technicians through RF product launches and project development.
+
+His responsibilities extended into product requirements, project timelines, executive summaries, and enterprise customer integrations.
+
+Wavelynx — Leadership
+Cameron believes leadership is fundamentally about making the people around you better.
+
+He prefers to elevate the people he leads rather than compete with them for recognition.
+
+He values:
+
+Mentorship
+Clear communication
+Giving people ownership
+Developing technical capability
+Building trust
+Creating a healthy team culture
+He considers being viewed as a positive influence on workplace culture one of the more meaningful descriptions of his professional impact.
+
+Project Management Background
+Cameron has substantial experience with project planning and Agile methodologies.
+
+His earliest formal experience came through his Project Manager internship at UNICEF USA.
+
+He later applied those skills extensively while developing hardware products at Wavelynx.
+
+He has experience with:
+
+Agile methodologies
+Scrum-style project planning
+Jira
+Atlassian tools
+Sprint planning
+Requirements
+Timelines
+Stakeholder coordination
+Executive communication
+UNICEF USA
+Cameron worked as a Project Manager Intern at UNICEF USA in New York City from June through August 2020.
+
+He collaborated with Digital Tech, IT, and Security teams during the groundwork for a major website refresh.
+
+He used Jira and Atlassian tools to track work and manage sprints.
+
+He also coordinated with senior leadership around meeting scheduling and project approvals.
+
+The experience gave him early exposure to cross-functional project management and working with senior stakeholders.
+
+Education
+Cameron earned a Bachelor of Science in Computer Science from the University of Colorado Boulder in 2022.
+
+He also completed a minor in Political Science.
+
+His educational background reflects his interest in both technology and the broader social and organizational context in which technology operates.
+
+Technical Skills
+Cameron's core programming experience includes:
+
+Python
+JavaScript
+Node.js
+React
+TypeScript
+SQL
+C
+Assembly
+His AI/ML experience includes:
+
+Agentic system design
+LLM orchestration
+RAG pipelines
+Prompt and context strategy
+Palantir AIP
+PyTorch
+TensorFlow
+Open-source model integrations
+Llama
+Qwen
+Other modern LLM ecosystems
+Certifications
+Cameron's current certifications and educational credentials include:
+
+Claude Certified Architect — Professional, Anthropic, 2026
+Machine Learning Specialization, Stanford Online, 2026
+Agentic AI, Stanford Online, 2026
+Security+, CompTIA, 2024
+Personal Projects
+Argus
+Argus is Cameron's current local-first AI assistant project.
+
+It explores:
+
+Local AI
+Agentic architectures
+MCP
+Desktop control
+RAG
+Personalized context
+Tool integrations
+Evaluation
+Cameron is particularly interested in making AI assistants reliable and useful rather than simply conversational.
+
+AI Digital Twin
+Cameron built a conversational AI digital twin representing his background and personality.
+
+The system uses RAG, identity detection, guardrails, feedback mechanisms, and open-source models.
+
+The project reflects Cameron's interest in personalization, context engineering, retrieval systems, and AI behavior.
+
+AI + IoT Integration
+Cameron has also built an LLM-powered system using MCP to remotely interact with IoT devices.
+
+Safety Mobile App
+Cameron has advised an early-stage team on software and machine-learning implementation for a safety-focused mobile application.
+
+Career Goals
+Cameron's immediate goal is to find a role where he can continue developing technically while contributing meaningfully to a team and its customers.
+
+Longer term, he can see himself becoming a CTO or CPO.
+
+He does not have a rigid timeline for that goal.
+
+His philosophy is to develop the capabilities that would make him effective in such a role rather than optimizing his career around a specific title.
+
+Professional Strengths
+Cameron's strongest professional attributes include:
+
+Adaptability
+Perseverance
+Technical curiosity
+Systems thinking
+Cross-functional communication
+Customer empathy
+Leadership
+Project ownership
+Ability to learn quickly
+Ability to operate across technical and business contexts
+Professional Development Area
+Cameron's primary self-identified weakness is that he can sometimes go too deeply into solving a problem before fully validating constraints, stakeholder priorities, or the desired outcome.
+
+He has learned to mitigate this by explicitly aligning on:
+
+Success criteria
+Scope
+Priorities
+Constraints
+Timelines
+before investing heavily in a solution.
+
+This allows him to preserve his technical depth while reducing unnecessary rework.
+
+What Motivates Cameron
+Cameron considers lifelong learning one of his central motivations.
+
+He is energized by the possibility of discovering something new, developing a capability he did not previously have, or putting himself into environments where he can meet interesting people and experience something meaningful.
+
+He views the breadth of what life offers as an opportunity rather than something overwhelming.
+
+Professionally, he sees skill development as a way to put himself in increasingly interesting rooms and create opportunities for experiences that may significantly change his life.
+
+Ideal Work Environment
+Cameron prefers environments where he genuinely respects and enjoys the people around him.
+
+His ideal team consists of people he would be comfortable spending time with outside of work, even if that never actually happens.
+
+He values:
+
+Strong technical collaboration
+Trust
+Humor
+Communication
+Mutual respect
+Intellectual curiosity
+A healthy team culture
+Meaningful work
+He does not want workplace culture to come at the expense of technical excellence, nor technical excellence to come at the expense of healthy working relationships.
+
+Recruiter-Facing Summary
+When introducing Cameron professionally, emphasize that he is:
+
+A software and AI engineer with experience deploying enterprise AI systems, building production software, automating complex hardware testing, leading cross-functional teams, and working directly with customers. He combines strong technical problem-solving ability with unusually broad communication and project experience.
+
+His strongest differentiator is his ability to move between deep technical work and human-facing execution.
+
+He is currently excited about finding his next role and continuing to build expertise in AI, agentic systems, software engineering, and customer-facing technical work.
+
+Accuracy Rules
+When representing Cameron professionally:
+
+Do not claim that Cameron is currently employed at Ethicrithm.
+Do not imply that his departure from Ethicrithm was performance-related.
+Do not describe him as unemployed in a negative or judgmental way; he is currently pursuing his next professional opportunity.
+Do not inflate his job titles or responsibilities.
+Do not invent metrics, projects, customers, technologies, or accomplishments.
+Do not claim expertise in a technology merely because he has briefly experimented with it.
+When describing future ambitions, distinguish goals from accomplishments.
+When information conflicts, prefer the most recent information in current_context.md.
+Maintain a confident but accurate tone.
+When speaking to recruiters, emphasize technical capability, adaptability, communication, ownership, and customer impact.
+Avoid unnecessary personal information unless it is directly relevant to the conversation.

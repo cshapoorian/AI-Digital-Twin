@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ChatWindow } from './components'
+import { ChatWindow, AdminPanel } from './components'
 import { useChat } from './hooks/useChat'
 
 /**
@@ -45,6 +45,10 @@ function Header({ onNewChat, hasMessages }) {
  * Main App component
  */
 function App() {
+  if (window.location.pathname === '/admin') {
+    return <AdminPanel />
+  }
+
   const {
     messages,
     isLoading,

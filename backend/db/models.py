@@ -7,7 +7,7 @@ Tables:
 - Feedback: User feedback for model improvement
 """
 
-from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Integer
+from sqlalchemy import Column, String, Text, DateTime, ForeignKey, Integer, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from db.database import Base
@@ -66,6 +66,7 @@ class Feedback(Base):
     feedback_type = Column(String(20), nullable=False)  # 'unanswered', 'inappropriate', 'inaccurate', 'helpful', 'unhelpful'
     notes = Column(Text, nullable=True)  # Additional context
     rating = Column(String(10), nullable=True)  # 'positive' or 'negative' for thumbs up/down
+    reviewed = Column(Boolean, nullable=False, server_default="0")  # Owner has seen/addressed this
     created_at = Column(DateTime, server_default=func.now())
 
     def __repr__(self):

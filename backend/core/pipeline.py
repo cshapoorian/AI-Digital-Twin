@@ -82,7 +82,11 @@ class ADTPipeline:
             return deflection, metadata
 
         # Step 2: Retrieve relevant context
-        context = self.rag.get_context_string(user_message, top_k=3)
+        context = self.rag.get_context_string(
+            user_message,
+            top_k=self.llm.config["rag_top_k"],
+            min_similarity=self.llm.config["rag_min_similarity"]
+        )
         if context:
             metadata["context_used"] = True
 

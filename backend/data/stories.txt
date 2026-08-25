@@ -1,0 +1,305 @@
+Cameron Shapoorian — Personal Stories
+This file contains real experiences from Cameron's life that can be used as supporting context when answering questions, telling stories, or explaining his personality and professional development.
+
+Stories should be told naturally and adapted to the context. They should not be repeated verbatim every time the same topic comes up.
+
+Soccer — Stitches, Then the Winning Goal
+One of Cameron's memorable soccer stories happened during a tournament.
+
+He was playing in a semifinal when he collided with the opposing team's goalkeeper and ended up needing stitches on his face.
+
+Despite the injury, he later returned to play in the final that same day.
+
+He ultimately scored the winning goal for the trophy.
+
+The story is representative of Cameron's competitive side and willingness to persevere through discomfort when something matters to him.
+
+Themes This Story Can Illustrate
+Perseverance
+Competitive spirit
+Commitment
+Soccer
+Taking something seriously while still being able to laugh about it afterward
+Pushing through adversity
+Natural Interview Use
+This story can be useful when discussing:
+
+A time Cameron persevered
+A difficult situation
+Competitive experiences
+Soccer
+Something memorable from his youth
+A time he refused to give up
+It should not be presented as evidence that Cameron believes people should ignore injuries or take unnecessary physical risks.
+
+Wavelynx — Solving the Bluetooth Memory Leak
+At Wavelynx, Cameron encountered a difficult Bluetooth memory leak affecting one of the company's hardware products.
+
+Other engineers had struggled to identify the source of the problem.
+
+Rather than giving up, Cameron researched the possible failure modes of the system and studied the hardware's memory map. He then connected the potential failure modes with what was happening in the memory behavior.
+
+That investigation eventually allowed him to identify the underlying issue.
+
+The problem mattered because it affected the reliability of a product used by customers, so Cameron was particularly motivated to keep working on it.
+
+The success of the investigation contributed to his professional growth and was part of the broader body of work that led to his promotion.
+
+Themes This Story Can Illustrate
+Technical problem solving
+Perseverance
+Debugging
+Systems thinking
+Hardware/software interaction
+Research
+Ownership
+Customer impact
+Natural Interview Use
+This story can be useful when discussing:
+
+A difficult technical problem
+Perseverance
+Debugging
+A time Cameron went beyond expectations
+A professional accomplishment
+Systems engineering
+Why Cameron enjoys difficult technical problems
+Wavelynx — Growing With the Company
+Cameron joined Wavelynx as his first full-time position after college.
+
+When he joined, the company was relatively small. During his time there, it grew into a more established mid-sized company.
+
+Because he was there during that period of growth, Cameron was able to see firsthand how a company changes as it scales.
+
+He learned not only about engineering and industry standards but also about how businesses operate, how products are brought to market, and how go-to-market and marketing strategies affect engineering and product decisions.
+
+He also contributed significantly to the culture of the company and became widely regarded as a source of technical knowledge.
+
+Themes This Story Can Illustrate
+Early-career growth
+Startup/small-company experience
+Organizational growth
+Business understanding
+Cross-functional work
+Company culture
+Developing institutional knowledge
+Natural Interview Use
+This story can be useful when discussing:
+
+First job
+Career development
+Working at a growing company
+Learning how businesses operate
+Cross-functional experience
+Company culture
+Why Cameron values well-rounded experience
+Wavelynx — Apex Reader
+Cameron's favorite project at Wavelynx was the Apex Reader.
+
+He owned a significant portion of the QA and testing processes for the product. His involvement expanded beyond testing into project planning and product development.
+
+He helped fill gaps in project planning through JIRA, identified necessary features, and contributed to defining product requirements.
+
+Because of his technical background and communication skills, he was able to work with developers and other stakeholders to help keep development moving smoothly.
+
+The project was particularly meaningful because Cameron wasn't simply validating a finished product. He was involved in understanding what should be built, how it should be developed, and how to make sure it worked correctly.
+
+Themes This Story Can Illustrate
+Product development
+QA and testing
+Project planning
+Requirements gathering
+Cross-functional communication
+Ownership
+Leadership
+Understanding the full product lifecycle
+Natural Interview Use
+This story can be useful when discussing:
+
+Favorite project
+Cross-functional work
+Product development
+QA
+Leadership
+Project management
+Requirements engineering
+Wavelynx — Learning How Business and Engineering Connect
+Because Wavelynx was relatively small when Cameron joined, he had opportunities to see how different parts of the company interacted.
+
+His experience extended beyond pure engineering. He learned how engineering decisions interacted with sales, marketing, product requirements, customers, and broader business goals.
+
+This helped shape his belief that strong engineers should understand the context around the technology they build.
+
+It also contributed to his interest in roles where he can work across technical and business boundaries rather than staying entirely isolated from customers or other teams.
+
+Themes This Story Can Illustrate
+Business awareness
+Cross-functional communication
+Customer empathy
+Product thinking
+Technical communication
+Career development
+Wavelynx — Learning From a Release Mistake
+At one point, Cameron released an update under significant time pressure without fully testing it.
+
+The result was an experience-breaking bug that required the team to scramble to identify and fix the problem.
+
+The experience was uncomfortable, but it gave him a concrete lesson about engineering discipline.
+
+Cameron came away believing even more strongly that testing should not simply be sacrificed because a deadline is approaching. He also became more conscious of the distinction between having lots of tests and having the right tests.
+
+The experience contributed to his current philosophy that testing should focus on meaningful risk and critical behavior rather than simply maximizing coverage numbers.
+
+Themes This Story Can Illustrate
+Failure
+Accountability
+Testing
+Engineering judgment
+Learning from mistakes
+Working under pressure
+Continuous improvement
+Natural Interview Use
+This story can be useful when discussing:
+
+A failure
+A mistake
+A lesson learned
+Testing philosophy
+Handling pressure
+Engineering process improvement
+Snowboarding — Taking the 5 AM Bus to Eldora
+While attending CU Boulder, Cameron worked as a snowboard instructor at Eldora.
+
+At the time, he did not have a car.
+
+To get to the mountain on weekends in time for work, he would take the 5 AM bus.
+
+The experience was part of what made snowboarding a particularly meaningful hobby for him. He had been snowboarding since second grade and eventually became skilled enough to teach others.
+
+Themes This Story Can Illustrate
+Dedication
+Snowboarding
+Working while in college
+Commitment
+Outdoor interests
+Willingness to inconvenience himself to pursue something he cares about
+Natural Conversation Use
+This story can be useful when discussing:
+
+Snowboarding
+College
+Hobbies
+Working during school
+Dedication to interests
+Colorado
+Soccer — Playing at a Regional Level
+Cameron played on a regional California soccer team that effectively brought together standout players from teams in the area around Davis, California.
+
+He also played varsity soccer as a freshman in high school and had a strong high school career.
+
+Soccer has been part of his life for essentially as long as he can remember.
+
+He eventually chose not to continue pursuing soccer competitively in college because he wanted to focus on building a longer-term career in technology.
+
+Themes This Story Can Illustrate
+Long-term commitment
+Competitive sports
+California
+Discipline
+Career decision-making
+Balancing passion with long-term goals
+Soccer — Choosing Technology Over College Athletics
+Soccer had been a major part of Cameron's life from a young age, including regional-level competition and varsity soccer in high school.
+
+When he reached college, he ultimately chose to focus on computer science and building a career in technology rather than continuing to pursue soccer competitively.
+
+The decision reflected his desire to prioritize a sustainable long-term professional path while keeping soccer as an important part of his life.
+
+This is an example of Cameron making a deliberate tradeoff between something he loved and something he believed better aligned with his long-term goals.
+
+Themes This Story Can Illustrate
+Long-term thinking
+Career decisions
+Sacrifice
+Prioritization
+Technology career
+Soccer
+Snowboarding — From Skiing to Snowboarding
+Cameron started skiing before he began snowboarding.
+
+After trying a snowboard lesson in second grade, he found that he preferred snowboarding and didn't want to go back to skiing.
+
+He has continued snowboarding ever since.
+
+Over time, he became comfortable riding essentially any terrain on a mountain despite never being part of a formal snowboard team.
+
+He currently focuses on improving his park riding and working on tricks such as backside 360s, additional railslides, and grabs while spinning.
+
+Themes This Story Can Illustrate
+Curiosity
+Trying new things
+Long-term hobbies
+Self-directed learning
+Snowboarding
+Eagle Scout
+Cameron is an Eagle Scout from Troop 243 in Lafayette, California.
+
+His scouting experience included his Eagle project, multiple years as a camp counselor, serving as an area director, and participating in and later counseling NYLT.
+
+Scouting was a significant part of his development and gave him experience with leadership, responsibility, community service, and working with younger people.
+
+Themes This Story Can Illustrate
+Leadership
+Community service
+Mentorship
+Responsibility
+Long-term commitment
+Working with younger people
+UNICEF USA — Early Project Management Experience
+Cameron worked as a Project Manager Intern at UNICEF USA in New York City from June through August 2020.
+
+He collaborated with Digital Tech, IT, and Security teams during the early groundwork for a major website refresh.
+
+He used Agile methodologies and Jira/Atlassian tools to track work and manage sprints, coordinated with senior leadership around meetings and approvals, and supported the website refresh initiative.
+
+The experience gave him early exposure to project management and cross-functional coordination before his engineering career became his primary professional focus.
+
+Themes This Story Can Illustrate
+Project management
+Agile
+Cross-functional coordination
+Nonprofit work
+Early professional experience
+Working with senior leadership
+Personal Development Through Diverse Experiences
+A recurring theme throughout Cameron's life is that he values being well-rounded.
+
+His experiences have included competitive soccer, snowboarding, Eagle Scouts, working in restaurants, engineering, project management, leadership, music, cooking, and technology.
+
+He tends to see these experiences as complementary rather than unrelated. Each has taught him something about people, discipline, communication, problem solving, or how organizations work.
+
+This is part of why Cameron considers lifelong learning one of his core motivations.
+
+How to Use These Stories
+When answering questions, select the story that most directly matches the subject.
+
+For example:
+
+Perseverance: Bluetooth memory leak or soccer injury
+Technical problem solving: Bluetooth memory leak
+Failure: Untested Wavelynx release
+Leadership: Eagle Scouts or leading at Wavelynx
+Favorite project: Apex Reader
+Career development: Wavelynx growth and promotion
+Business understanding: Growing with Wavelynx
+Project management: UNICEF or Apex Reader
+Dedication: Eldora snowboard instructor / 5 AM bus
+Long-term commitment: Soccer or snowboarding
+Making a difficult tradeoff: Choosing technology over college athletics
+Community/mentorship: Eagle Scouts
+Cross-functional communication: Apex Reader, Wavelynx, or Ethicrithm
+Stories should be adapted to the question rather than forced into an unrelated conversation.
+
+Do not invent additional details such as exact dates, names, dialogue, locations, emotions, or outcomes that Cameron has not provided.
+
+When a story is used in a professional context, emphasize the relevant lesson or behavior rather than embellishing the story for dramatic effect.

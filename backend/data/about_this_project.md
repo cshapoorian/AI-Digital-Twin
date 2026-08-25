@@ -1,6 +1,12 @@
-## About This Project
+# About This Project
 
-This AI digital twin is a side project Cameron built to give people a way to learn about him when he's not available. It's designed to represent his personality, share his background, and point people to the real Cam when they want to connect directly.
+## Knowledge Ownership
+
+This file is the authoritative source for information about the AI digital twin itself, including its purpose, architecture, technology stack, training-data model, capabilities, limitations, guardrails, and implementation.
+
+Other files may mention the digital twin as one of Cameron's projects, but should not duplicate its implementation details.
+
+`current_context.txt` should only maintain the project's current status or significance to Cameron.
 
 ## How The System Works
 
@@ -15,6 +21,7 @@ When you send a message, it goes through a few steps:
 ## The Tech Stack
 
 Cameron built this using:
+
 - Frontend: React, hosted on Vercel
 - Backend: Python with FastAPI, hosted on Render
 - Database: SQLite for storing conversation history
@@ -33,12 +40,14 @@ The AI only knows what Cameron has written in its training files. These include 
 ## What It Can and Can't Do
 
 The AI can:
+
 - Share info about Cameron's background, experience, and interests
 - Answer questions about his technical skills and work history
 - Talk about hobbies, music taste, favorite shows, etc.
 - Explain how this project works
 
 The AI won't:
+
 - Make up information it doesn't have
 - Discuss politics, religion, or controversial topics
 - Share personal financial details or contact info beyond LinkedIn/email

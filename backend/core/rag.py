@@ -1,15 +1,28 @@
 """
 RAG (Retrieval-Augmented Generation) module.
 
-Handles loading training data and retrieving relevant chunks
-based on user queries using TF-IDF similarity.
+Handles loading training data and retrieving relevant chunks based on user
+queries. Uses semantic embeddings (fastembed, ONNX-based, no PyTorch) for
+real synonym/paraphrase matching, with an automatic fallback to TF-IDF if
+the embedding model can't load (e.g. constrained memory or no network on
+first run) so retrieval never goes fully offline.
 """
 
 from pathlib import Path
 from typing import List, Tuple
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
+
+try:
+    from fastembed import TextEmbedding
+    _FASTEMBED_AVAILABLE = True
+except ImportError:
+    _FASTEMBED_AVAILABLE = False
+
+# Small (~90MB), ONNX-based, no torch dependency - fits Render's free-tier RAM
+EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 # Query expansion for common interview/personal questions
@@ -50,13 +63,16 @@ class RAGRetriever:
     Uses TF-IDF vectorization for lightweight, efficient retrieval.
     """
 
-    def __init__(self, data_dir: str = None):
+    def __init__(self, data_dir: str = None, use_embeddings: bool = True):
         """
         Initialize the retriever with training data.
 
         Args:
             data_dir: Path to directory containing training text files.
                       Defaults to backend/data/
+            use_embeddings: Try to use semantic embeddings for retrieval.
+                             Falls back to TF-IDF automatically if the
+                             embedding model can't be loaded.
         """
         if data_dir is None:
             data_dir = Path(__file__).parent.parent / "data"
@@ -65,20 +81,30 @@ class RAGRetriever:
 
         self.data_dir = data_dir
         self.chunks: List[Tuple[str, str]] = []  # (chunk_text, source_file)
+
+        # TF-IDF is always set up as the fallback path
         self.vectorizer = TfidfVectorizer(
             stop_words="english",
             ngram_range=(1, 2),  # Unigrams and bigrams for better matching
             token_pattern=r'(?u)\b\w+\b'  # Include single-character tokens
         )  # No max_features limit - we don't have enough data to need it
         self.tfidf_matrix = None
+
+        self._use_embeddings = use_embeddings and _FASTEMBED_AVAILABLE
+        self._embedding_model = None
+        self.chunk_embeddings = None  # np.ndarray, shape (n_chunks, dim)
+
         self._load_data()
 
     def _load_data(self):
         """
         Load all .txt files from data directory and split into chunks.
         Each paragraph becomes a separate chunk for granular retrieval.
+        Builds semantic embeddings when available, otherwise TF-IDF.
         """
         self.chunks = []
+        self.chunk_embeddings = None
+        self.tfidf_matrix = None
 
         if not self.data_dir.exists():
             print(f"Warning: Data directory {self.data_dir} does not exist")
@@ -92,13 +118,26 @@ class RAGRetriever:
             except Exception as e:
                 print(f"Error loading {txt_file}: {e}")
 
-        if self.chunks:
-            # Build TF-IDF matrix for all chunks
-            chunk_texts = [chunk[0] for chunk in self.chunks]
-            self.tfidf_matrix = self.vectorizer.fit_transform(chunk_texts)
-            print(f"Loaded {len(self.chunks)} chunks from {len(list(self.data_dir.glob('*.txt')))} files")
-        else:
+        if not self.chunks:
             print("Warning: No training data loaded")
+            return
+
+        chunk_texts = [chunk[0] for chunk in self.chunks]
+        n_files = len(list(self.data_dir.glob('*.txt')))
+
+        if self._use_embeddings:
+            try:
+                if self._embedding_model is None:
+                    self._embedding_model = TextEmbedding(model_name=EMBEDDING_MODEL_NAME)
+                self.chunk_embeddings = np.array(list(self._embedding_model.embed(chunk_texts)))
+                print(f"Loaded {len(self.chunks)} chunks from {n_files} files (semantic embeddings)")
+            except Exception as e:
+                print(f"Warning: embedding model unavailable ({e}), falling back to TF-IDF")
+                self._use_embeddings = False
+
+        if not self._use_embeddings:
+            self.tfidf_matrix = self.vectorizer.fit_transform(chunk_texts)
+            print(f"Loaded {len(self.chunks)} chunks from {n_files} files (TF-IDF)")
 
     def _split_into_chunks(self, content: str, source: str) -> List[Tuple[str, str]]:
         """
@@ -170,55 +209,63 @@ class RAGRetriever:
 
         return " ".join(expanded_terms)
 
-    def retrieve(self, query: str, top_k: int = 3) -> List[Tuple[str, str, float]]:
+    def retrieve(
+        self, query: str, top_k: int = 3, min_similarity: float = 0.05
+    ) -> List[Tuple[str, str, float]]:
         """
         Retrieve the most relevant chunks for a given query.
 
         Args:
             query: User's question or message
             top_k: Number of top chunks to return
+            min_similarity: Minimum similarity score to include a result
 
         Returns:
             List of (chunk_text, source_file, similarity_score) tuples,
             sorted by relevance (highest first)
         """
-        if not self.chunks or self.tfidf_matrix is None:
+        has_index = self.chunk_embeddings is not None or self.tfidf_matrix is not None
+        if not self.chunks or not has_index:
             return []
 
         # Expand query with related terms for better matching
         expanded_query = self._expand_query(query)
 
-        # Vectorize the expanded query
-        query_vector = self.vectorizer.transform([expanded_query])
-
-        # Calculate similarity with all chunks
-        similarities = cosine_similarity(query_vector, self.tfidf_matrix)[0]
+        if self._use_embeddings and self.chunk_embeddings is not None:
+            query_vector = np.array(list(self._embedding_model.embed([expanded_query])))
+            similarities = cosine_similarity(query_vector, self.chunk_embeddings)[0]
+        else:
+            query_vector = self.vectorizer.transform([expanded_query])
+            similarities = cosine_similarity(query_vector, self.tfidf_matrix)[0]
 
         # Get top-k indices
         top_indices = similarities.argsort()[-top_k:][::-1]
 
-        # Filter out low-similarity results (threshold: 0.05 for expanded queries)
+        # Filter out low-similarity results
         results = []
         for idx in top_indices:
             score = similarities[idx]
-            if score > 0.05:  # Lower threshold since we're using expanded queries
+            if score > min_similarity:
                 chunk_text, source = self.chunks[idx]
                 results.append((chunk_text, source, float(score)))
 
         return results
 
-    def get_context_string(self, query: str, top_k: int = 3) -> str:
+    def get_context_string(
+        self, query: str, top_k: int = 3, min_similarity: float = 0.05
+    ) -> str:
         """
         Get a formatted context string for the LLM prompt.
 
         Args:
             query: User's question
             top_k: Number of chunks to include
+            min_similarity: Minimum similarity score to include a result
 
         Returns:
             Formatted string with relevant context, or empty string if none found
         """
-        results = self.retrieve(query, top_k)
+        results = self.retrieve(query, top_k, min_similarity)
 
         if not results:
             return ""

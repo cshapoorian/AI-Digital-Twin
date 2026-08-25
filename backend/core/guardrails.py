@@ -155,19 +155,19 @@ class GuardrailsFilter:
 
     # Default deflection response
     DEFLECTION_RESPONSE = (
-        "I'd prefer to keep our conversation focused on topics Cameron is comfortable with. "
-        "Feel free to ask about his hobbies, work, interests, or other aspects of who he is!"
+        "I'd prefer to keep our conversation focused on topics I'm comfortable with. "
+        "Feel free to ask about my hobbies, work, interests, or other aspects of who I am!"
     )
 
     # Deflection responses for different scenarios
     JAILBREAK_RESPONSE = (
-        "I'm not sure what you're getting at, but I'm just here to share information about Cameron. "
-        "What would you like to know about him?"
+        "I'm not sure what you're getting at, but I'm just here to share info about myself. "
+        "What would you like to know?"
     )
 
     MANIPULATION_RESPONSE = (
-        "I can only share what I know about Cameron based on the information he's provided. "
-        "Is there something specific you'd like to know about him?"
+        "I can only share what's actually true about me. "
+        "Is there something specific you'd like to know?"
     )
 
     def __init__(self):
@@ -238,21 +238,21 @@ class GuardrailsFilter:
             if pattern.search(user_message):
                 return False, (
                     "I'd appreciate if we could keep the conversation respectful. "
-                    "What else would you like to know about Cameron?"
+                    "What else would you like to know?"
                 )
 
         return True, None
 
     # Fallback for when fabrication is detected
     FABRICATION_FALLBACK = (
-        "Hmm, I'm not entirely sure about that detail regarding Cameron. "
-        "Is there something else you'd like to know about him?"
+        "Hmm, I'm not entirely sure about that detail. "
+        "Is there something else you'd like to know?"
     )
 
     # Fallback for when negative self-statements are detected
     NEGATIVE_OWNER_FALLBACK = (
-        "I prefer to focus on the positives when talking about Cameron! "
-        "What else would you like to know about him?"
+        "I'd rather focus on the positives when talking about myself! "
+        "What else would you like to know?"
     )
 
     # Response for non-controversial topics where info is missing - offer direct contact
