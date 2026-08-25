@@ -16,6 +16,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+# File extensions treated as training data in the data directory.
+DATA_FILE_SUFFIXES = (".md", ".txt")
+
+
 # Query expansion for common interview/personal questions.
 # Maps common query terms to related terms that might appear in training data.
 QUERY_EXPANSIONS = {
@@ -265,26 +269,35 @@ class RAGRetriever:
             )
             return
 
-        txt_files = list(self.data_dir.glob("*.txt"))
+        # Training data is authored as Markdown. ".txt" remains
+        # supported so older/plain-text knowledge files keep working.
+        data_files = sorted(
+            path
+            for suffix in DATA_FILE_SUFFIXES
+            for path in self.data_dir.glob(f"*{suffix}")
+        )
 
-        if not txt_files:
-            print("Warning: No training .txt files found")
+        if not data_files:
+            print(
+                "Warning: No training files found "
+                f"({', '.join(DATA_FILE_SUFFIXES)})"
+            )
             return
 
-        for txt_file in txt_files:
+        for data_file in data_files:
             try:
-                content = txt_file.read_text(encoding="utf-8")
+                content = data_file.read_text(encoding="utf-8")
 
                 file_chunks = self._split_into_chunks(
                     content,
-                    txt_file.name,
+                    data_file.name,
                 )
 
                 self.chunks.extend(file_chunks)
 
             except Exception as exc:
                 print(
-                    f"Error loading {txt_file.name}: {exc}"
+                    f"Error loading {data_file.name}: {exc}"
                 )
 
         if not self.chunks:
@@ -303,7 +316,7 @@ class RAGRetriever:
 
             print(
                 f"Loaded {len(self.chunks)} chunks "
-                f"from {len(txt_files)} files "
+                f"from {len(data_files)} files "
                 f"(TF-IDF)"
             )
 
@@ -315,6 +328,13 @@ class RAGRetriever:
             self.chunks = []
             self.tfidf_matrix = None
 
+    # Maximum characters for a heading-based chunk before it is split
+    # further. Oversized chunks dilute TF-IDF scores and retrieve poorly.
+    MAX_SECTION_CHARS = 2500
+
+    # Approximate target size for chunks built from bare paragraphs.
+    PARAGRAPH_CHUNK_CHARS = 500
+
     def _split_into_chunks(
         self,
         content: str,
@@ -324,13 +344,16 @@ class RAGRetriever:
         Split Markdown/text into retrieval-friendly chunks.
 
         Sections beginning with ## are kept together when reasonably
-        sized. Other content is grouped into chunks of approximately
-        500 characters.
+        sized. An oversized section is split again on its ###
+        subheadings, with the parent heading prepended so each chunk
+        keeps its context. Content with no headings at all is grouped
+        into chunks of roughly PARAGRAPH_CHUNK_CHARS characters.
         """
 
         chunks = []
 
-        # Split on Markdown ## headings.
+        # Split on Markdown ## headings. "### " does not match the
+        # lookahead, so subheadings stay with their parent section.
         sections = re.split(
             r"\n(?=## )",
             content,
@@ -342,51 +365,114 @@ class RAGRetriever:
             if not section:
                 continue
 
+            is_headed = (
+                section.startswith("## ")
+                or section.startswith("# ")
+            )
+
+            if not is_headed:
+                chunks.extend(
+                    self._split_paragraphs(section, source)
+                )
+                continue
+
             # Keep headed sections together when they aren't enormous.
-            if section.startswith("## ") or section.startswith("# "):
+            if 50 < len(section) <= self.MAX_SECTION_CHARS:
+                chunks.append(
+                    (section, source)
+                )
+                continue
 
-                if len(section) <= 2500 and len(section) > 50:
-                    chunks.append(
-                        (section, source)
-                    )
-                    continue
+            # Oversized section: prefer its ### subheadings so the
+            # subsections keep a heading instead of becoming loose text.
+            parent_heading = section.split("\n", 1)[0].strip()
 
-            # For non-headed content, split into paragraphs.
-            paragraphs = re.split(
-                r"\n\s*\n",
+            subsections = re.split(
+                r"\n(?=### )",
                 section,
             )
 
-            current_chunk = ""
+            if len(subsections) == 1:
+                chunks.extend(
+                    self._split_paragraphs(section, source)
+                )
+                continue
 
-            for paragraph in paragraphs:
-                paragraph = paragraph.strip()
+            for subsection in subsections:
+                subsection = subsection.strip()
 
-                if not paragraph:
+                if not subsection:
                     continue
 
-                # Keep chunks reasonably small.
-                if (
-                    current_chunk
-                    and len(current_chunk) + len(paragraph) + 2 > 500
-                ):
-                    if len(current_chunk) > 50:
-                        chunks.append(
-                            (current_chunk, source)
-                        )
+                if not subsection.startswith("### "):
+                    # Intro text ahead of the first subheading.
+                    chunks.extend(
+                        self._split_paragraphs(subsection, source)
+                    )
+                    continue
 
-                    current_chunk = paragraph
+                # Carry the parent heading so the chunk keeps context.
+                subsection = f"{parent_heading}\n\n{subsection}"
+
+                if len(subsection) <= self.MAX_SECTION_CHARS:
+                    chunks.append(
+                        (subsection, source)
+                    )
 
                 else:
-                    if current_chunk:
-                        current_chunk += "\n\n"
+                    chunks.extend(
+                        self._split_paragraphs(subsection, source)
+                    )
 
-                    current_chunk += paragraph
+        return chunks
 
-            if len(current_chunk) > 50:
-                chunks.append(
-                    (current_chunk, source)
-                )
+    def _split_paragraphs(
+        self,
+        section: str,
+        source: str,
+    ) -> List[Tuple[str, str]]:
+        """
+        Group content without usable headings into size-bounded chunks.
+        """
+
+        chunks = []
+
+        paragraphs = re.split(
+            r"\n\s*\n",
+            section,
+        )
+
+        current_chunk = ""
+
+        for paragraph in paragraphs:
+            paragraph = paragraph.strip()
+
+            if not paragraph:
+                continue
+
+            # Keep chunks reasonably small.
+            if (
+                current_chunk
+                and len(current_chunk) + len(paragraph) + 2
+                > self.PARAGRAPH_CHUNK_CHARS
+            ):
+                if len(current_chunk) > 50:
+                    chunks.append(
+                        (current_chunk, source)
+                    )
+
+                current_chunk = paragraph
+
+            else:
+                if current_chunk:
+                    current_chunk += "\n\n"
+
+                current_chunk += paragraph
+
+        if len(current_chunk) > 50:
+            chunks.append(
+                (current_chunk, source)
+            )
 
         return chunks
 

@@ -45,16 +45,21 @@
 |                                      |                                       |
 |  +---------------------+   +--------------------------------------------+   |
 |  |   Training Data     |   |            SQLite Database                 |   |
-|  |   (Text Files)      |   |   - conversations (session tracking)       |   |
-|  |   - hobbies.txt     |   |   - messages (chat history)                |   |
-|  |   - personality.txt |   |   - feedback (user ratings + auto-logged)  |   |
-|  |   - interview_      |   |   - analytics (privacy-friendly events)    |   |
-|  |     responses.txt   |   |                                            |   |
-|  |   - family_and_     |   +--------------------------------------------+   |
-|  |     friends.txt     |                                                    |
-|  |   - opinions.txt    |                                                    |
+|  |   (Markdown Files)  |   |   - conversations (session tracking)       |   |
+|  |   - current_        |   |   - messages (chat history)                |   |
+|  |     context.md      |   |   - feedback (user ratings + auto-logged)  |   |
+|  |   - professional_   |   |   - analytics (privacy-friendly events)    |   |
+|  |     identity.md     |   |                                            |   |
+|  |   - interview_      |   +--------------------------------------------+   |
+|  |     responses.md    |                                                    |
+|  |   - stories.md      |                                                    |
+|  |   - personality.md  |                                                    |
+|  |   - opinions.md     |                                                    |
+|  |   - voice_          |                                                    |
+|  |     examples.md     |                                                    |
+|  |   - hobbies.md      |                                                    |
 |  |   - about_this_     |                                                    |
-|  |     project.txt     |                                                    |
+|  |     project.md      |                                                    |
 |  +---------------------+                                                    |
 +-----------------------------------------------------------------------------+
                                       |
@@ -139,7 +144,7 @@ backend/
 │   ├── system_prompt.txt   # Personality/identity prompt
 │   └── settings.txt        # Model parameters
 ├── data/                # OWNER CUSTOMIZES (do not modify)
-│   └── *.txt            # Training text files
+│   └── *.md             # Training data (Markdown; .txt also supported)
 ├── db/
 │   ├── __init__.py      # Database exports
 │   ├── database.py      # SQLite connection + session
@@ -173,18 +178,20 @@ The pipeline orchestrates response generation through multiple stages:
 **Purpose**: Retrieve relevant personal information based on user query.
 
 **Implementation** (`core/rag.py`):
-- Load all `.txt` files from `data/` directory
-- Split into chunks (section-based with ## headers, or paragraph-based)
-- Embed chunks with a local semantic embedding model (`fastembed`, ONNX-based - no PyTorch,
-  ~90MB, `sentence-transformers/all-MiniLM-L6-v2`) for real synonym/paraphrase matching
-- Falls back to TF-IDF automatically if the embedding model can't load (e.g. no network on
-  first run) so retrieval never goes fully offline
+- Load all `.md` and `.txt` files from `data/` directory (see `DATA_FILE_SUFFIXES`)
+- Split into chunks (section-based on `##` headers, falling back to paragraph-based
+  grouping of ~500 characters for content without headings)
+- Score chunks against the query with TF-IDF + cosine similarity (scikit-learn)
 - Query expansion for common interview questions (weakness -> weaknesses, flaw, struggle)
 - Return top-K relevant chunks above a minimum similarity, both configurable via
   `rag_top_k` / `rag_min_similarity` in `settings.txt`
 
-**Why local embeddings over an API?**: Free, no per-request cost or latency, and small enough
-to fit comfortably in Render's free-tier memory limit (unlike full PyTorch-based models).
+**Why TF-IDF over embeddings?**: Free, no model download or per-request cost, and small
+enough to run reliably inside Render's free-tier memory limit.
+
+**Why Markdown training data?**: Chunking is heading-aware, so a `##` section is retrieved
+as one coherent unit with its heading intact. Plain-text files without headings fall back to
+paragraph chunks that lose that context, which retrieves noticeably worse.
 
 #### Stage 3: LLM Generation
 **Purpose**: Generate response using retrieved context + personality prompt.

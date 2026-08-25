@@ -362,8 +362,6 @@ More recently, he has enjoyed:
 - Jujutsu Kaisen
 - Demon Slayer
 
-He once cosplayed as Nanami from Jujutsu Kaisen for Halloween.
-
 These are personal preferences rather than objective evaluations.
 
 ### Video Game Preferences

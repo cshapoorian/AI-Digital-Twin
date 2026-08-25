@@ -37,7 +37,7 @@ class GuardrailsFilter:
 
     # Topics to block in INPUT ONLY
     # NOTE: Interview questions (weakness, strength, why hire, etc.) are now ALLOWED
-    # because we have training data for them in interview_responses.txt
+    # because we have training data for them in interview_responses.md
     INPUT_ONLY_BLOCKED = [
         # Currently empty - interview questions now have training data
     ]

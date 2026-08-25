@@ -18,19 +18,11 @@ His departure from Ethicrithm was not performance-related.
 
 ## Most Recent Role — Ethicrithm
 
-Cameron worked as a Forward Deployed Engineer at Ethicrithm from March through August 2026.
+Cameron worked as a Forward Deployed Engineer at Ethicrithm from March through August 2026, deploying agentic AI workflows for enterprise clients.
 
-The role involved deploying agentic AI workflows for enterprise clients and working directly with customers on technical implementations.
+He particularly enjoyed the combination of technical implementation, AI, and direct interaction with customers, and that experience is shaping what he is looking for next.
 
-Notable work included:
-
-- Delivering 3–5% operational cost reductions for multi-million-dollar clients across two engagements.
-- Automating a meeting intelligence pipeline that processed 30+ recordings per week and saved four executives hours of manual review.
-- Replacing organization-wide Excel tracking with a centralized deliverable-tracking platform adopted across engagements.
-- Building 5+ production frontend widgets using Python and TypeScript across client-facing and internal platforms.
-- Working directly with clients to understand operational problems and translate them into technical solutions.
-
-Cameron particularly enjoyed the combination of technical implementation, AI, and direct interaction with customers.
+The full record of the role — scope, accomplishments, and metrics — is maintained in `professional_identity.md`.
 
 ## Current Career Direction
 

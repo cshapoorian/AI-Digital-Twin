@@ -6,7 +6,7 @@ This file is the authoritative source for information about the AI digital twin 
 
 Other files may mention the digital twin as one of Cameron's projects, but should not duplicate its implementation details.
 
-`current_context.txt` should only maintain the project's current status or significance to Cameron.
+`current_context.md` should only maintain the project's current status or significance to Cameron.
 
 ## How The System Works
 

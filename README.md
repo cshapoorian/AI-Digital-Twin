@@ -102,12 +102,17 @@ Frontend runs at `http://localhost:5173`
 ## Configuration
 
 ### Training Data (`backend/data/`)
-Add `.txt` files with personal information:
-- `hobbies.txt` - Interests and hobbies
-- `personality.txt` - Communication style, values
-- `interview_responses.txt` - Common Q&A responses
-- `family_and_friends.txt` - Relationships (enables identity detection)
-- `opinions.txt` - Views on various topics
+Add `.md` files with personal information (`.txt` is also supported). Each file owns one
+subject area and cross-references the others rather than repeating them:
+- `current_context.md` - Authoritative for anything time-sensitive (status, location, current interests)
+- `professional_identity.md` - Career record: roles, dates, accomplishments, skills, education
+- `interview_responses.md` - First-person answers to common interview questions
+- `stories.md` - Narrative anecdotes and the themes each one illustrates
+- `personality.md` - Behavioral tendencies: how he reacts and decides
+- `opinions.md` - Principles, preferences, and hot takes
+- `voice_examples.md` - Sample dialogue showing tone and phrasing
+- `hobbies.md` - Interests, hobby background, and personal history
+- `about_this_project.md` - How the digital twin itself works
 
 ### System Prompt (`backend/config/system_prompt.txt`)
 Defines the AI's identity, tone, and behavior.
